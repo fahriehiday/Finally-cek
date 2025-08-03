@@ -30,6 +30,7 @@
       left: 0;
       padding: 1rem;
       color: white;
+      transition: transform 0.3s ease;
     }
 
     .sidebar h2 {
@@ -54,6 +55,7 @@
     .main-content {
       margin-left: 250px;
       padding: 2rem;
+      transition: margin-left 0.3s ease;
     }
 
     header {
@@ -139,6 +141,7 @@
     }
 
     .hidden { display: none; }
+    
     .product-selection {
       display: flex;
       flex-direction: column;
@@ -147,15 +150,18 @@
       background: #f5f3ff;
       border-radius: 0.5rem;
     }
+
     .product-selection div {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
+
     input[type="number"]:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
+
     .copy-btn {
       margin-top: 5px;
       background-color: #a78bfa;
@@ -165,10 +171,25 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <h2>Dashboard</h2>
     <a href="#" onclick="showForm()">Pendaftaran</a>
     <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">Contoh Desain Template</a>
@@ -197,9 +218,9 @@
         <label for="paket">Pilih Paket:</label>
         <select id="paket" required>
           <option value="">-- Pilih Paket --</option>
-          <option value="Rp30.000">Harga Semula 3̶4̶.̶9̶9̶9̶  Menjadi Rp30.000 / 1 Bulan</option>
-          <option value="Rp50.000">Harga Semula 5̶4̶.̶9̶9̶9̶  Menjadi Rp50.000 / 2 Bulan</option>
-          <option value="Rp80.000">Harga Semula 1̶0̶0̶.̶0̶0̶0̶  Menjadi Rp80.000 / 3 Bulan</option>
+          <option value="Rp30.000">Harga Semula 34.999 Menjadi Rp30.000 / 1 Bulan</option>
+          <option value="Rp50.000">Harga Semula 54.999 Menjadi Rp50.000 / 2 Bulan</option>
+          <option value="Rp80.000">Harga Semula 100.000 Menjadi Rp80.000 / 3 Bulan</option>
         </select>
 
         <label>Pilih Produk Awal:</label>
