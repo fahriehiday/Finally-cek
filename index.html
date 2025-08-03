@@ -173,6 +173,17 @@
       cursor: pointer;
     }
 
+    .total-payment {
+      font-weight: bold;
+      color: #6a1b9a;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #6a1b9a;
+      border-radius: 8px;
+      background-color: rgba(106, 27, 154, 0.1);
+      text-align: center;
+    }
+
     @media (max-width: 768px) {
       .sidebar {
         width: 100%;
@@ -223,31 +234,31 @@
         <input type="text" id="wa" required>
 
         <label for="paket">Pilih Paket:</label>
-        <select id="paket" required>
+        <select id="paket" required onchange="updateTotalPayment()">
           <option value="">-- Pilih Paket --</option>
-          <option value="Rp30.000">Harga Semula 34.999 Menjadi Rp30.000 / 1 Bulan</option>
-          <option value="Rp50.000">Harga Semula 54.999 Menjadi Rp50.000 / 2 Bulan</option>
-          <option value="Rp80.000">Harga Semula 100.000 Menjadi Rp80.000 / 3 Bulan</option>
+          <option value="30000">Harga Semula 34.999 Menjadi Rp30.000 / 1 Bulan</option>
+          <option value="50000">Harga Semula 54.999 Menjadi Rp50.000 / 2 Bulan</option>
+          <option value="80000">Harga Semula 100.000 Menjadi Rp80.000 / 3 Bulan</option>
         </select>
 
         <label>Pilih Produk Awal:</label>
         <div class="product-selection">
           <div>
-            <input type="number" id="cv-count" min="0" max="3" value="0" style="width:50px" onchange="updateProductLimits()">
+            <input type="number" id="cv-count" min="0" value="0" style="width:50px" onchange="updateProductLimits()">
             <label for="cv-count">CV</label>
           </div>
           <div>
-            <input type="number" id="presentation-count" min="0" max="3" value="0" style="width:50px" onchange="updateProductLimits()">
+            <input type="number" id="presentation-count" min="0" value="0" style="width:50px" onchange="updateProductLimits()">
             <label for="presentation-count">Presentation</label>
           </div>
           <div>
-            <input type="number" id="portfolio-count" min="0" max="3" value="0" style="width:50px" onchange="updateProductLimits()">
+            <input type="number" id="portfolio-count" min="0" value="0" style="width:50px" onchange="updateProductLimits()">
             <label for="portfolio-count">Portfolio</label>
           </div>
         </div>
 
         <label for="metode">Metode Pembayaran:</label>
-        <select id="metode" required onchange="updateRekening()">
+        <select id="metode" required onchange="updateRekening(); updateTotalPayment()">
           <option value="">-- Pilih Metode --</option>
           <option value="DANA">DANA</option>
           <option value="Bank Mandiri">Bank Mandiri</option>
@@ -267,6 +278,8 @@
 
         <label for="referral">Kode Referral Orang Lain (opsional)</label>
         <input type="text" id="referral">
+
+        <div class="total-payment" id="total-payment"></div>
 
         <button type="submit">🚀 Daftar Sekarang</button>
       </form>
@@ -308,11 +321,36 @@
       const presentationCount = parseInt(document.getElementById("presentation-count").value);
       const portfolioCount = parseInt(document.getElementById("portfolio-count").value);
       const totalSelected = cvCount + presentationCount + portfolioCount;
-      
-      // Enable/disable inputs based on selection
-      document.getElementById("cv-count").disabled = totalSelected >= 3 && cvCount === 0;
-      document.getElementById("presentation-count").disabled = totalSelected >= 3 && presentationCount === 0;
-      document.getElementById("portfolio-count").disabled = totalSelected >= 3 && portfolioCount === 0;
+
+      // Reset all inputs to enabled
+      document.getElementById("cv-count").disabled = false;
+      document.getElementById("presentation-count").disabled = false;
+      document.getElementById("portfolio-count").disabled = false;
+
+      // Limit total selections to 3
+      if (totalSelected >= 3) {
+        if (cvCount > 0) {
+          document.getElementById("presentation-count").disabled = presentationCount === 0 && totalSelected >= 3;
+          document.getElementById("portfolio-count").disabled = portfolioCount === 0 && totalSelected >= 3;
+        } else if (presentationCount > 0) {
+          document.getElementById("cv-count").disabled = cvCount === 0 && totalSelected >= 3;
+          document.getElementById("portfolio-count").disabled = portfolioCount === 0 && totalSelected >= 3;
+        } else if (portfolioCount > 0) {
+          document.getElementById("cv-count").disabled = cvCount === 0 && totalSelected >= 3;
+          document.getElementById("presentation-count").disabled = presentationCount === 0 && totalSelected >= 3;
+        }
+      }
+    }
+
+    function updateTotalPayment() {
+      const paket = document.getElementById("paket").value;
+      const totalPaymentElement = document.getElementById("total-payment");
+
+      if (paket) {
+        totalPaymentElement.textContent = `Total yang harus dibayar: Rp${paket}`;
+      } else {
+        totalPaymentElement.textContent = '';
+      }
     }
 
     function kirimWhatsApp(e) {
@@ -337,7 +375,7 @@
       
       const produkAwalText = produkAwal.join(", ") || "Tidak memilih produk";
 
-      const pesan = `📋 Form Pendaftaran Produk Digital Premium\n\n🧑 Nama: ${nama}\n📱 WhatsApp: ${wa}\n📦 Paket Dipilih: ${paketText}\n🎁 Produk Awal: ${produkAwalText}\n💸 Total Transfer: ${total}\n🏦 Metode Pembayaran: ${metode}\n🏷️ Kode Referral Baru: ${kode}\n👥 Kode Referral Teman: ${referral}\n📎 Bukti pembayaran sudah diupload melalui form.`;
+      const pesan = `📋 Form Pendaftaran Produk Digital Premium\n\n🧑 Nama: ${nama}\n📱 WhatsApp: ${wa}\n📦 Paket Dipilih: ${paketText}\n🎁 Produk Awal: ${produkAwalText}\n💸 Total Transfer: Rp${total}\n🏦 Metode Pembayaran: ${metode}\n🏷️ Kode Referral Baru: ${kode}\n👥 Kode Referral Teman: ${referral}\n📎 Bukti pembayaran sudah diupload melalui form.`;
 
       const url = `https://wa.me/6285928811220?text=${encodeURIComponent(pesan)}`;
       window.open(url, "_blank");
