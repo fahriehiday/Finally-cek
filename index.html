@@ -30,7 +30,6 @@
       left: 0;
       padding: 1rem;
       color: white;
-      transition: transform 0.3s ease;
     }
 
     .sidebar h2 {
@@ -55,7 +54,6 @@
     .main-content {
       margin-left: 250px;
       padding: 2rem;
-      transition: margin-left 0.3s ease;
     }
 
     header {
@@ -141,7 +139,6 @@
     }
 
     .hidden { display: none; }
-    
     .product-selection {
       display: flex;
       flex-direction: column;
@@ -174,7 +171,9 @@
 
     @media (max-width: 768px) {
       .sidebar {
-        transform: translateX(-100%);
+        width: 100%;
+        height: auto;
+        position: relative;
       }
 
       .main-content {
@@ -182,14 +181,18 @@
         padding: 1rem;
       }
 
-      .sidebar.active {
-        transform: translateX(0);
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .button {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="sidebar" id="sidebar">
+  <div class="sidebar">
     <h2>Dashboard</h2>
     <a href="#" onclick="showForm()">Pendaftaran</a>
     <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">Contoh Desain Template</a>
