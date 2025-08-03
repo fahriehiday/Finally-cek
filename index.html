@@ -2,233 +2,318 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Premium Digital Product Template Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Produk Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #f0f9ff);
+    }
+
+    body {
+      background: linear-gradient(to right, #ede9fe, #f3e8ff);
+      color: #1f2937;
+      scroll-behavior: smooth;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #4c1d95;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1rem;
+      color: white;
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 0.75rem;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #6d28d9;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #4c1d95;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .button {
+      background: #7c3aed;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      width: 80%;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: #6d28d9;
+    }
+
+    #form-lanjutan {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.9);
       max-width: 600px;
-      margin: auto;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
-    h2 { text-align: center; color: #1e3a8a; }
-    input, select, button {
-      width: 100%; padding: 12px; margin: 10px 0;
-      border-radius: 10px; border: 1px solid #cbd5e1; font-size: 16px;
+
+    #form-lanjutan h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #4c1d95;
     }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    input,
+    select,
     button {
-      background-color: #3b82f6; color: white; font-weight: bold;
-      border: none; transition: background-color 0.3s;
-      position: sticky; bottom: 10px; z-index: 10;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
     }
-    button:hover { background-color: #2563eb; }
-    label { font-weight: 600; }
-    .highlight {
-      background-color: #e0f2fe; padding: 8px; border-radius: 8px; margin-top: 8px;
+
+    button[type="submit"] {
+      background-color: #7c3aed;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
     }
-    .help-button {
-      background-color: #facc15; color: #1f2937; margin-top: 20px;
+
+    .hidden { display: none; }
+    .product-selection {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: #f5f3ff;
+      border-radius: 0.5rem;
     }
-    .thankyou {
-      display: none; text-align: center; padding: 20px;
-      background-color: #ecfdf5; color: #065f46; border-radius: 12px;
-      margin-top: 20px;
+    .product-selection div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
-    #toast {
-      display: none; position: fixed; bottom: 20px; right: 20px;
-      background: #4ade80; color: white; padding: 12px 18px;
-      border-radius: 8px; font-weight: bold;
-    }
-    #progress-container {
-      background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-bottom: 16px;
-    }
-    #progress-bar {
-      background: #3b82f6; height: 10px; transition: width 0.3s ease; width: 50%;
+    input[type="number"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
     .copy-btn {
-      background-color: #10b981; color: white; border: none;
-      border-radius: 8px; padding: 8px 12px; cursor: pointer; margin-top: 8px;
-    }
-    .harga-paket {
-      font-weight: bold; margin-top: 8px; display: block;
-    }
-    .countdown {
-      text-align: center; font-size: 14px; margin-top: 10px; color: #1e40af;
-    }
-    @media (max-width: 480px) {
-      body { padding: 10px; font-size: 14px; }
-      input, select, button { font-size: 14px; }
-    }
-    s {
-      color: #9ca3af; font-weight: normal; margin-right: 6px;
-      text-decoration: line-through;
+      margin-top: 5px;
+      background-color: #a78bfa;
+      color: #1f2937;
+      border: none;
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h2>🎨 Template Produk Digital Premium</h2>
-  <div id="progress-container"><div id="progress-bar"></div></div>
-  <p style="text-align:center;">Langkah 1 dari 2</p>
+  <div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="#" onclick="showForm()">Pendaftaran</a>
+    <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">Contoh Desain Template</a>
+    <a href="https://drive.google.com/drive/folders/1r9ga93TSo4Hr2XdRtYckltxMulFNclAM?usp=sharing" target="_blank">Testimoni</a>
+    <a href="https://wa.me/6285928811220" target="_blank">Chat Admin via WhatsApp</a>
+  </div>
 
-  <form id="regForm">
-    <label>Nama Lengkap</label>
-    <input type="text" name="nama" required />
+  <div class="main-content">
+    <header>
+      <h1>🎨 Template Produk Digital Premium</h1>
+    </header>
 
-    <label>Nomor WhatsApp</label>
-    <input type="text" name="wa" required />
+    <div class="button-group">
+      <a class="button" href="#" onclick="showForm()">Pendaftaran</a>
+    </div>
 
-    <label>Pilih Paket:</label>
-    <select name="paket" id="paket">
-      <option value="30000">🎉 Harga Semula <s>3̶4̶.̶9̶9̶9̶</s> Menjadi Rp30.000 / 1 Bulan</option>
-      <option value="50000">🎉 Harga Semula <s>64̶.̶9̶9̶9̶</s> Menjadi Rp50.000 / 2 Bulan</option>
-      <option value="75000">🎉 Harga Semula <s>84̶.̶9̶9̶9̶</s> Menjadi Rp75.000 / 3 Bulan</option>
-    </select>
-    <span class="harga-paket" id="hargaPaket"></span>
+    <section id="form-lanjutan" data-aos="fade-up">
+      <h2>Formulir Pendaftaran</h2>
+      <form onsubmit="kirimWhatsApp(event)">
+        <label for="nama">Nama Lengkap:</label>
+        <input type="text" id="nama" required>
 
-    <label>Metode Pembayaran:</label>
-    <select name="pembayaran">
-      <option value="">-- Pilih Metode --</option>
-      <option value="DANA">DANA</option>
-      <option value="MANDIRI">Mandiri</option>
-    </select>
+        <label for="wa">Nomor WhatsApp:</label>
+        <input type="text" id="wa" required>
 
-    <div id="nomorPembayaran" class="highlight"></div>
-    <button type="button" class="copy-btn" id="salinBtn">📋 Salin Nomor</button>
-    <div class="countdown" id="countdown"></div>
+        <label for="paket">Pilih Paket:</label>
+        <select id="paket" required>
+          <option value="">-- Pilih Paket --</option>
+          <option value="Rp30.000">Harga Semula 3̶4̶.̶9̶9̶9̶  Menjadi Rp30.000 / 1 Bulan</option>
+          <option value="Rp50.000">Harga Semula 5̶4̶.̶9̶9̶9̶  Menjadi Rp50.000 / 2 Bulan</option>
+          <option value="Rp80.000">Harga Semula 1̶0̶0̶.̶0̶0̶0̶  Menjadi Rp80.000 / 3 Bulan</option>
+        </select>
 
-    <label>Upload Bukti Pembayaran (foto)</label>
-    <input type="file" name="bukti" accept="image/*" required />
+        <label>Pilih Produk Awal:</label>
+        <div class="product-selection">
+          <div>
+            <input type="number" id="cv-count" min="0" max="3" value="0" style="width:50px" onchange="updateProductLimits()">
+            <label for="cv-count">CV</label>
+          </div>
+          <div>
+            <input type="number" id="presentation-count" min="0" max="3" value="0" style="width:50px" onchange="updateProductLimits()">
+            <label for="presentation-count">Presentation</label>
+          </div>
+          <div>
+            <input type="number" id="portfolio-count" min="0" max="3" value="0" style="width:50px" onchange="updateProductLimits()">
+            <label for="portfolio-count">Portfolio</label>
+          </div>
+        </div>
 
-    <label>Buat Kode Referral Anda</label>
-    <input type="text" name="referral_baru" placeholder="Contoh: NAMAKAMU25" />
+        <label for="metode">Metode Pembayaran:</label>
+        <select id="metode" required onchange="updateRekening()">
+          <option value="">-- Pilih Metode --</option>
+          <option value="DANA">DANA</option>
+          <option value="Bank Mandiri">Bank Mandiri</option>
+        </select>
 
-    <label>Kode Referral Orang Lain (opsional)</label>
-    <input type="text" name="referral" id="referral" />
+        <div id="rekening" class="hidden">
+          <label>Nomor untuk Transfer:</label>
+          <div id="nomorRekening"></div>
+          <button type="button" class="copy-btn" onclick="copyRekening()">Salin Nomor</button>
+        </div>
 
-    <div id="diskonInfo" class="highlight"></div>
+        <label for="bukti">Upload Bukti Pembayaran (foto):</label>
+        <input type="file" id="bukti" required>
 
-    <button type="button" id="submitBtn">Kirim Pendaftaran</button>
-  </form>
+        <label for="kode">Buat Kode Referral Anda</label>
+        <input type="text" id="kode" placeholder="Contoh: NAMAKAMU25" required>
 
-  <button class="help-button" onclick="bukaBantuan()">❓ Butuh Bantuan?</button>
+        <label for="referral">Kode Referral Orang Lain (opsional)</label>
+        <input type="text" id="referral">
 
-  <div class="thankyou" id="thankyouMessage"></div>
-  <div id="toast"></div>
+        <button type="submit">🚀 Daftar Sekarang</button>
+      </form>
+    </section>
+  </div>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    const metodePembayaran = document.querySelector('select[name="pembayaran"]');
-    const nomorPembayaran = document.getElementById("nomorPembayaran");
-    const paketSelect = document.getElementById("paket");
-    const hargaPaket = document.getElementById("hargaPaket");
-    const countdownEl = document.getElementById("countdown");
-    const salinBtn = document.getElementById("salinBtn");
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
 
-    let countdown;
-    let batasWaktu;
+    function showForm() {
+      document.getElementById('form-lanjutan').style.display = 'block';
+    }
 
-    function tampilkanNomorDanQR(metode) {
-      if (metode === "DANA") {
-        nomorPembayaran.innerHTML = `💰 Transfer ke <strong id="targetNomor">0838-3637-8972</strong> a.n. Fahri Hidayat`;
-      } else if (metode === "MANDIRI") {
-        nomorPembayaran.innerHTML = `🏦 Transfer ke <strong id="targetNomor">1340030538796</strong> a.n. Fahri Hidayat`;
+    function updateRekening() {
+      const metode = document.getElementById("metode").value;
+      const nomorRekening = {
+        "DANA": "083836378972",
+        "Bank Mandiri": "1340030538796"
+      };
+      if (nomorRekening[metode]) {
+        document.getElementById("rekening").classList.remove("hidden");
+        document.getElementById("nomorRekening").textContent = nomorRekening[metode];
       } else {
-        nomorPembayaran.innerHTML = "";
+        document.getElementById("rekening").classList.add("hidden");
       }
     }
 
-    metodePembayaran.addEventListener("change", () => {
-      const metode = metodePembayaran.value;
-      tampilkanNomorDanQR(metode);
-    });
-
-    salinBtn.addEventListener("click", function () {
-      const target = document.getElementById("targetNomor");
-      if (target) {
-        const text = target.textContent.trim();
-        navigator.clipboard.writeText(text).then(() => {
-          alert("✅ Nomor berhasil disalin: " + text);
-        }).catch(err => {
-          alert("❌ Gagal menyalin: " + err);
-        });
-      } else {
-        alert("⚠️ Silakan pilih metode pembayaran terlebih dahulu.");
-      }
-    });
-
-    paketSelect.addEventListener("change", () => {
-      const harga = paketSelect.value;
-      hargaPaket.textContent = `💸 Total yang harus ditransfer: Rp${parseInt(harga).toLocaleString('id-ID')}`;
-
-      clearInterval(countdown);
-      const now = new Date();
-      batasWaktu = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-
-      countdown = setInterval(() => {
-        const sekarang = new Date();
-        const selisih = batasWaktu - sekarang;
-        if (selisih <= 0) {
-          clearInterval(countdown);
-          countdownEl.textContent = "⛔️ Waktu pembayaran telah habis.";
-        } else {
-          const jam = Math.floor(selisih / (1000 * 60 * 60));
-          const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-          const detik = Math.floor((selisih % (1000 * 60)) / 1000);
-          countdownEl.textContent = `⏱️ Batas Pembayaran: ${jam}j ${menit}m ${detik}d`;
-        }
-      }, 1000);
-    });
-
-    function bukaBantuan() {
-      const nama = document.querySelector('input[name="nama"]').value.trim();
-      const wa = document.querySelector('input[name="wa"]').value.trim();
-      const paket = document.querySelector('select[name="paket"]').value;
-      const metode = document.querySelector('select[name="pembayaran"]').value;
-      const nomor = "+6285928811220";
-
-      let pesan = `Halo, saya butuh bantuan.`;
-
-      if (nama !== "") {
-        pesan = `Halo, saya atas nama ${nama}`;
-        if (paket) pesan += `, memilih paket Rp${parseInt(paket).toLocaleString('id-ID')}`;
-        if (metode) pesan += `, menggunakan metode pembayaran ${metode}`;
-        if (wa) pesan += `. Nomor WA saya: ${wa}`;
-        pesan += ", saya butuh bantuan.";
-      }
-
-      window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`, "_blank");
+    function copyRekening() {
+      const text = document.getElementById("nomorRekening").textContent;
+      navigator.clipboard.writeText(text).then(() => alert("Nomor berhasil disalin"));
     }
 
-    document.getElementById("submitBtn").addEventListener("click", function () {
-      const nama = document.querySelector('input[name="nama"]').value.trim();
-      const wa = document.querySelector('input[name="wa"]').value.trim();
-      const paketValue = document.querySelector('select[name="paket"]').value;
-      const paketText = document.querySelector('#paket option:checked').textContent;
-      const metode = document.querySelector('select[name="pembayaran"]').value;
-      const referralBaru = document.querySelector('input[name="referral_baru"]').value.trim();
-      const referral = document.querySelector('input[name="referral"]').value.trim();
+    function updateProductLimits() {
+      const cvCount = parseInt(document.getElementById("cv-count").value);
+      const presentationCount = parseInt(document.getElementById("presentation-count").value);
+      const portfolioCount = parseInt(document.getElementById("portfolio-count").value);
+      const totalSelected = cvCount + presentationCount + portfolioCount;
+      
+      // Enable/disable inputs based on selection
+      document.getElementById("cv-count").disabled = totalSelected >= 3 && cvCount === 0;
+      document.getElementById("presentation-count").disabled = totalSelected >= 3 && presentationCount === 0;
+      document.getElementById("portfolio-count").disabled = totalSelected >= 3 && portfolioCount === 0;
+    }
 
-      if (!nama || !wa || !paketValue || !metode) {
-        alert("❗ Harap lengkapi semua data wajib sebelum mengirim.");
-        return;
-      }
+    function kirimWhatsApp(e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const wa = document.getElementById("wa").value;
+      const paket = document.getElementById("paket");
+      const paketText = paket.options[paket.selectedIndex].text;
+      const total = paket.value;
+      const metode = document.getElementById("metode").value;
+      const kode = document.getElementById("kode").value;
+      const referral = document.getElementById("referral").value || "-";
 
-      let pesan = `📝 *Form Pendaftaran Produk Digital Premium*\n\n`;
-      pesan += `👤 Nama: ${nama}\n`;
-      pesan += `📞 WhatsApp: ${wa}\n`;
-      pesan += `📦 Paket Dipilih: ${paketText}\n`;
-      pesan += `💰 Total Transfer: Rp${parseInt(paketValue).toLocaleString('id-ID')}\n`;
-      pesan += `💳 Metode Pembayaran: ${metode}\n`;
-      if (referralBaru) pesan += `🔗 Kode Referral Baru: ${referralBaru}\n`;
-      if (referral) pesan += `👥 Kode Referral Teman: ${referral}\n`;
-      pesan += `📎 Bukti pembayaran sudah diupload melalui form.`;
+      const cvCount = document.getElementById("cv-count").value;
+      const presentationCount = document.getElementById("presentation-count").value;
+      const portfolioCount = document.getElementById("portfolio-count").value;
+      
+      let produkAwal = [];
+      if (cvCount > 0) produkAwal.push(`CV ${cvCount}`);
+      if (presentationCount > 0) produkAwal.push(`Presentation ${presentationCount}`);
+      if (portfolioCount > 0) produkAwal.push(`Portfolio ${portfolioCount}`);
+      
+      const produkAwalText = produkAwal.join(", ") || "Tidak memilih produk";
 
-      const nomorAdmin = "+6285928811220";
-      window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`, "_blank");
-    });
+      const pesan = `📋 Form Pendaftaran Produk Digital Premium\n\n🧑 Nama: ${nama}\n📱 WhatsApp: ${wa}\n📦 Paket Dipilih: ${paketText}\n🎁 Produk Awal: ${produkAwalText}\n💸 Total Transfer: ${total}\n🏦 Metode Pembayaran: ${metode}\n🏷️ Kode Referral Baru: ${kode}\n👥 Kode Referral Teman: ${referral}\n📎 Bukti pembayaran sudah diupload melalui form.`;
+
+      const url = `https://wa.me/6285928811220?text=${encodeURIComponent(pesan)}`;
+      window.open(url, "_blank");
+    }
   </script>
 </body>
 </html>
