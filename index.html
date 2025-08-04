@@ -179,6 +179,16 @@
       text-align: center;
     }
 
+    .notification {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #e8f5e9;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      color: #388e3c;
+      font-weight: bold;
+    }
+
     @media (max-width: 768px) {
       .sidebar {
         width: 100%;
@@ -232,10 +242,12 @@
         <label for="paket">Pilih Paket:</label>
         <select id="paket" required onchange="updateTotalPayment()">
           <option value="">-- Pilih Paket --</option>
-          <option value="30000">Harga Semula  ̶3̶4̶.̶9̶9̶9̶  Menjadi Rp30.000 / 1 Bulan</option>
-          <option value="50000">Harga Semula  ̶5̶4̶.̶9̶9̶9̶  Menjadi Rp50.000 / 2 Bulan</option>
-          <option value="80000">Harga Semula  ̶1̶0̶0̶.̶0̶0̶0̶  Menjadi Rp80.000 / 3 Bulan</option>
+          <option value="30000" data-max="3">Harga Semula  ̶3̶4̶.̶9̶9̶9̶  Menjadi Rp30.000 / 1 Bulan</option>
+          <option value="50000" data-max="6">Harga Semula  ̶5̶4̶.̶9̶9̶9̶  Menjadi Rp50.000 / 2 Bulan</option>
+          <option value="80000" data-max="9">Harga Semula  ̶1̶0̶0̶.̶0̶0̶0̶  Menjadi Rp80.000 / 3 Bulan</option>
         </select>
+
+        <div id="notification" class="notification hidden"></div>
 
         <label>Pilih Produk Awal:</label>
         <div class="product-selection">
@@ -253,7 +265,7 @@
           </div>
         </div>
 
-        <p style="color: red;">Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. Namun, jika total produk yang dipilih melebihi 3, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.</p>
+        <p style="color: red;">Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. Namun, jika total produk yang dipilih melebihi batas paket, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.</p>
 
         <label for="metode">Metode Pembayaran:</label>
         <select id="metode" required onchange="updateRekening(); updateTotalPayment()">
@@ -319,24 +331,40 @@
     }
 
     function updateTotalPayment() {
-      const paket = document.getElementById("paket").value;
+      const paket = document.getElementById("paket");
+      const maxProducts = parseInt(paket.options[paket.selectedIndex].getAttribute('data-max'));
       const cvCount = parseInt(document.getElementById("cv-count").value);
       const presentationCount = parseInt(document.getElementById("presentation-count").value);
       const portfolioCount = parseInt(document.getElementById("portfolio-count").value);
       const totalSelected = cvCount + presentationCount + portfolioCount;
       let additionalCost = 0;
 
-      if (totalSelected > 3) {
-        additionalCost = (totalSelected - 3) * 10000; // 10k for each additional template
+      if (totalSelected > maxProducts) {
+        additionalCost = (totalSelected - maxProducts) * 10000; // 10k for each additional template
       }
 
-      const totalPayment = parseInt(paket) + additionalCost;
+      const totalPayment = parseInt(paket.value) + additionalCost;
       const totalPaymentElement = document.getElementById("total-payment");
 
-      if (paket) {
+      if (paket.value) {
         totalPaymentElement.textContent = `Total yang harus dibayar: Rp${totalPayment}`;
       } else {
         totalPaymentElement.textContent = '';
+      }
+
+      // Update notification based on selected package
+      const notification = document.getElementById("notification");
+      if (paket.value === "30000") {
+        notification.textContent = "✅ Paket 1 maximal 3 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu - Total 7 Produk / Template Digital Baru Dalam 1 Bulan";
+        notification.classList.remove("hidden");
+      } else if (paket.value === "50000") {
+        notification.textContent = "✅ Paket 2 maximal 6 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu - Total 14 Produk / Template Digital Baru Dalam 2 Bulan";
+        notification.classList.remove("hidden");
+      } else if (paket.value === "80000") {
+        notification.textContent = "✅ Paket 3 maximal 9 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu - Total 21 Produk / Template Digital Baru Dalam 3 Bulan";
+        notification.classList.remove("hidden");
+      } else {
+        notification.classList.add("hidden");
       }
     }
 
