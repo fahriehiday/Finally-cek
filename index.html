@@ -257,6 +257,8 @@
           </div>
         </div>
 
+        <p style="color: red;">Untuk Template Maximal 3, Contohnya: CV 1, Presentasi 1, Porto 1 / CV 3 / CV 2 Presentasi 1. Jika Lebih Dari 3 Di kenakan biaya tambahan 1 Template 10k.</p>
+
         <label for="metode">Metode Pembayaran:</label>
         <select id="metode" required onchange="updateRekening(); updateTotalPayment()">
           <option value="">-- Pilih Metode --</option>
@@ -340,14 +342,26 @@
           document.getElementById("presentation-count").disabled = presentationCount === 0 && totalSelected >= 3;
         }
       }
+      updateTotalPayment(); // Update total payment after product limits are checked
     }
 
     function updateTotalPayment() {
       const paket = document.getElementById("paket").value;
+      const cvCount = parseInt(document.getElementById("cv-count").value);
+      const presentationCount = parseInt(document.getElementById("presentation-count").value);
+      const portfolioCount = parseInt(document.getElementById("portfolio-count").value);
+      const totalSelected = cvCount + presentationCount + portfolioCount;
+      let additionalCost = 0;
+
+      if (totalSelected > 3) {
+        additionalCost = (totalSelected - 3) * 10000; // 10k for each additional template
+      }
+
+      const totalPayment = parseInt(paket) + additionalCost;
       const totalPaymentElement = document.getElementById("total-payment");
 
       if (paket) {
-        totalPaymentElement.textContent = `Total yang harus dibayar: Rp${paket}`;
+        totalPaymentElement.textContent = `Total yang harus dibayar: Rp${totalPayment}`;
       } else {
         totalPaymentElement.textContent = '';
       }
@@ -359,7 +373,7 @@
       const wa = document.getElementById("wa").value;
       const paket = document.getElementById("paket");
       const paketText = paket.options[paket.selectedIndex].text;
-      const total = paket.value;
+      const total = document.getElementById("total-payment").textContent.replace(/[^0-9]/g, ''); // Get total payment value
       const metode = document.getElementById("metode").value;
       const kode = document.getElementById("kode").value;
       const referral = document.getElementById("referral").value || "-";
