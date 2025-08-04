@@ -158,11 +158,6 @@
       gap: 1rem;
     }
 
-    input[type="number"]:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
     .copy-btn {
       margin-top: 5px;
       background-color: #a78bfa;
@@ -222,6 +217,7 @@
 
     <div class="button-group">
       <a class="button" href="#" onclick="showForm()">Pendaftaran</a>
+      <button class="button" onclick="refreshPage()">Refresh Halaman</button>
     </div>
 
     <section id="form-lanjutan" data-aos="fade-up">
@@ -244,20 +240,20 @@
         <label>Pilih Produk Awal:</label>
         <div class="product-selection">
           <div>
-            <input type="number" id="cv-count" min="0" value="0" style="width:50px" onchange="updateProductLimits()">
+            <input type="number" id="cv-count" min="0" value="0" style="width:50px" onchange="updateTotalPayment()">
             <label for="cv-count">CV</label>
           </div>
           <div>
-            <input type="number" id="presentation-count" min="0" value="0" style="width:50px" onchange="updateProductLimits()">
+            <input type="number" id="presentation-count" min="0" value="0" style="width:50px" onchange="updateTotalPayment()">
             <label for="presentation-count">Presentation</label>
           </div>
           <div>
-            <input type="number" id="portfolio-count" min="0" value="0" style="width:50px" onchange="updateProductLimits()">
+            <input type="number" id="portfolio-count" min="0" value="0" style="width:50px" onchange="updateTotalPayment()">
             <label for="portfolio-count">Portfolio</label>
           </div>
         </div>
 
-        <p style="color: red;">Untuk Template Maximal 3, Contohnya: CV 1, Presentasi 1, Porto 1 / CV 3 / CV 2 Presentasi 1. Jika Lebih Dari 3 Di kenakan biaya tambahan 1 Template 10k.</p>
+        <p style="color: red;">Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. Namun, jika total produk yang dipilih melebihi 3, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.</p>
 
         <label for="metode">Metode Pembayaran:</label>
         <select id="metode" required onchange="updateRekening(); updateTotalPayment()">
@@ -299,6 +295,10 @@
       document.getElementById('form-lanjutan').style.display = 'block';
     }
 
+    function refreshPage() {
+      location.reload(); // Refresh the page
+    }
+
     function updateRekening() {
       const metode = document.getElementById("metode").value;
       const nomorRekening = {
@@ -316,33 +316,6 @@
     function copyRekening() {
       const text = document.getElementById("nomorRekening").textContent;
       navigator.clipboard.writeText(text).then(() => alert("Nomor berhasil disalin"));
-    }
-
-    function updateProductLimits() {
-      const cvCount = parseInt(document.getElementById("cv-count").value);
-      const presentationCount = parseInt(document.getElementById("presentation-count").value);
-      const portfolioCount = parseInt(document.getElementById("portfolio-count").value);
-      const totalSelected = cvCount + presentationCount + portfolioCount;
-
-      // Reset all inputs to enabled
-      document.getElementById("cv-count").disabled = false;
-      document.getElementById("presentation-count").disabled = false;
-      document.getElementById("portfolio-count").disabled = false;
-
-      // Limit total selections to 3
-      if (totalSelected >= 3) {
-        if (cvCount > 0) {
-          document.getElementById("presentation-count").disabled = presentationCount === 0 && totalSelected >= 3;
-          document.getElementById("portfolio-count").disabled = portfolioCount === 0 && totalSelected >= 3;
-        } else if (presentationCount > 0) {
-          document.getElementById("cv-count").disabled = cvCount === 0 && totalSelected >= 3;
-          document.getElementById("portfolio-count").disabled = portfolioCount === 0 && totalSelected >= 3;
-        } else if (portfolioCount > 0) {
-          document.getElementById("cv-count").disabled = cvCount === 0 && totalSelected >= 3;
-          document.getElementById("presentation-count").disabled = presentationCount === 0 && totalSelected >= 3;
-        }
-      }
-      updateTotalPayment(); // Update total payment after product limits are checked
     }
 
     function updateTotalPayment() {
