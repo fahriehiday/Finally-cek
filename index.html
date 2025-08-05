@@ -1,40 +1,120 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Produk Digital</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DesignJockey | Professional Design Services & Digital Products</title>
+  <meta name="description" content="High-quality design services and premium digital templates including logo design, posters, banners, CV templates and presentation designs.">
+  
+  <!-- Combined Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Combined CSS Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
+    /* Combined CSS Variables */
+    :root {
+      /* Design Services Colors */
+      --ds-primary: #6c5ce7;
+      --ds-primary-dark: #5649c0;
+      --ds-secondary: #fd79a8;
+      --ds-accent: #00cec9;
+      --ds-dark: #2d3436;
+      --ds-light: #f5f6fa;
+      
+      /* Digital Products Colors */
+      --dp-primary: #6a1b9a;
+      --dp-primary-light: #9c27b0;
+      --dp-primary-dark: #4a148c;
+      --dp-secondary: #ff4081;
+      --dp-accent: #00bcd4;
+      --dp-gold: #FFD700;
+    }
+
+    /* Base Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    :root {
-      --primary: #6a1b9a;
-      --primary-light: #9c27b0;
-      --primary-dark: #4a148c;
-      --secondary: #ff4081;
-      --accent: #00bcd4;
-      --gold: #FFD700;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-      color: #212121;
-      scroll-behavior: smooth;
+      background-color: #f8f9fa;
+      color: var(--ds-dark);
       overflow-x: hidden;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Shared Components */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      color: var(--ds-dark);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--ds-primary), var(--ds-accent));
+      border-radius: 3px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--ds-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    /* ==================== */
+    /* DIGITAL PRODUCTS STYLES */
+    /* ==================== */
+    .digital-products-section {
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+      padding: 4rem 0;
+    }
+
+    .dp-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
     .sidebar {
       width: 280px;
-      background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+      background: linear-gradient(to bottom, var(--dp-primary), var(--dp-primary-dark));
       height: 100vh;
       position: fixed;
       top: 0;
@@ -43,12 +123,12 @@
       color: white;
       box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
       z-index: 1000;
-      transform: translateX(0);
+      transform: translateX(-100%);
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .sidebar.hidden {
-      transform: translateX(-100%);
+    .sidebar.visible {
+      transform: translateX(0);
     }
 
     .sidebar h2 {
@@ -75,25 +155,10 @@
       overflow: hidden;
     }
 
-    .sidebar a::before {
-      content: '';
-      position: absolute;
-      left: -100%;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: 0.5s;
-    }
-
     .sidebar a:hover {
-      background-color: var(--primary-light);
+      background-color: var(--dp-primary-light);
       transform: translateX(5px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    .sidebar a:hover::before {
-      left: 100%;
     }
 
     .sidebar a i {
@@ -102,22 +167,18 @@
     }
 
     .main-content {
-      margin-left: 280px;
+      margin-left: 0;
       padding: 2rem;
       transition: margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .main-content.full-width {
-      margin-left: 0;
-    }
-
-    header {
+    .dp-header {
       text-align: center;
       padding: 2rem 0;
       position: relative;
     }
 
-    header::before {
+    .dp-header::before {
       content: '';
       position: absolute;
       bottom: 0;
@@ -125,20 +186,19 @@
       transform: translateX(-50%);
       width: 150px;
       height: 4px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
       border-radius: 2px;
     }
 
-    header h1 {
+    .dp-header h1 {
       font-size: 2.8rem;
       font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
       display: inline-block;
+      margin-bottom: 1rem;
     }
 
     .button-group {
@@ -151,8 +211,8 @@
       max-width: 600px;
     }
 
-    .button {
-      background: linear-gradient(to right, var(--primary), var(--primary-light));
+    .dp-button {
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-primary-light));
       color: white;
       padding: 1rem 2rem;
       border: none;
@@ -170,25 +230,9 @@
       overflow: hidden;
     }
 
-    .button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-
-    .button:hover {
+    .dp-button:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-
-    .button:hover::after {
-      transform: translateX(100%);
     }
 
     #form-lanjutan {
@@ -201,14 +245,12 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.3);
-      transform-style: preserve-3d;
-      perspective: 1000px;
     }
 
     #form-lanjutan h2 {
       font-size: 2rem;
       margin-bottom: 1.5rem;
-      color: var(--primary);
+      color: var(--dp-primary);
       text-align: center;
       position: relative;
       padding-bottom: 10px;
@@ -222,20 +264,18 @@
       transform: translateX(-50%);
       width: 80px;
       height: 3px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
       border-radius: 3px;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .form-group {
+      margin-bottom: 1.5rem;
     }
 
     label {
       text-align: left;
       font-weight: 600;
-      color: var(--primary-dark);
+      color: var(--dp-primary-dark);
       display: block;
       margin-bottom: 0.5rem;
       font-size: 0.95rem;
@@ -255,12 +295,12 @@
     input:focus,
     select:focus {
       outline: none;
-      border-color: var(--primary-light);
+      border-color: var(--dp-primary-light);
       box-shadow: 0 0 0 3px rgba(154, 68, 181, 0.2);
     }
 
     button[type="submit"] {
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
       color: white;
       font-weight: 600;
       border: none;
@@ -279,7 +319,6 @@
       box-shadow: 0 8px 25px rgba(154, 68, 181, 0.5);
     }
 
-    .hidden { display: none; }
     .product-selection {
       display: flex;
       flex-direction: column;
@@ -321,17 +360,11 @@
       padding: 1.5rem;
       border: none;
       border-radius: 12px;
-      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-primary-light));
       text-align: center;
       font-size: 1.2rem;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
     }
 
     .notification {
@@ -346,9 +379,336 @@
       animation: fadeIn 0.5s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .keunggulan-section {
+      max-width: 800px;
+      margin: 4rem auto;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245, 243, 255, 0.95) 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .keunggulan-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--dp-primary);
+      text-align: center;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .keunggulan-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
+      border-radius: 2px;
+    }
+
+    .keunggulan-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .keunggulan-item {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .keunggulan-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
+      border-radius: 50%;
+    }
+
+    .keunggulan-highlight {
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .keunggulan-divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--dp-primary), transparent);
+      margin: 2rem 0;
+      border: none;
+    }
+
+    .keunggulan-price {
+      background: rgba(106, 27, 154, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--dp-primary);
+      transition: all 0.3s ease;
+    }
+
+    .keunggulan-price:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .keunggulan-price-title {
+      font-weight: 700;
+      color: var(--dp-primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .keunggulan-price-title i {
+      margin-right: 10px;
+      color: var(--dp-gold);
+    }
+
+    .keunggulan-price-desc {
+      padding-left: 1.5rem;
+    }
+
+    .keunggulan-cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .keunggulan-badge {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: linear-gradient(to right, var(--dp-secondary), #ff6b6b);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 700;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: pulse 1.5s infinite;
+    }
+
+    /* ==================== */
+    /* DESIGN SERVICES STYLES */
+    /* ==================== */
+    .design-services-section {
+      padding: 4rem 0;
+      margin-top: 4rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      color: var(--ds-primary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .header p {
+      color: #7f8c8d;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--ds-primary), var(--ds-primary-dark));
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+
+    .hero::before {
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .hero::after {
+      bottom: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .package-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--ds-primary);
+    }
+
+    .package-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .package-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--ds-primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .package-card:hover .package-icon {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .package-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .package-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--ds-primary);
+    }
+
+    .package-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .package-features li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .package-features li i {
+      margin-right: 10px;
+      color: var(--ds-accent);
+      font-size: 0.9rem;
+      margin-top: 3px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 5rem;
+      color: rgba(108, 92, 231, 0.1);
+      font-family: serif;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: #555;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--ds-light);
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ds-primary);
+      font-weight: 600;
+      flex-shrink: 0;
     }
 
     .menu-toggle {
@@ -357,7 +717,7 @@
       top: 20px;
       left: 20px;
       z-index: 1100;
-      background: var(--primary);
+      background: var(--dp-primary);
       color: white;
       border: none;
       border-radius: 50%;
@@ -377,7 +737,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
+      background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
       color: white;
       padding: 1rem 1.5rem;
       border-radius: 10px;
@@ -385,17 +745,6 @@
       z-index: 1000;
       animation: slideInUp 0.5s ease, bounce 2s infinite;
       display: none;
-    }
-
-    @keyframes slideInUp {
-      from { transform: translateY(100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
     }
 
     .tooltip {
@@ -427,180 +776,219 @@
       opacity: 1;
     }
 
-    .ripple {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ripple:after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
-      background-repeat: no-repeat;
-      background-position: 50%;
-      transform: scale(10, 10);
-      opacity: 0;
-      transition: transform .5s, opacity 1s;
-    }
-
-    .ripple:active:after {
-      transform: scale(0, 0);
-      opacity: 0.3;
-      transition: 0s;
-    }
-
-    .slide-in {
-      animation: slideIn 0.5s ease forwards;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateX(-100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    /* Keunggulan Section */
-    .keunggulan-section {
-      max-width: 800px;
-      margin: 4rem auto;
-      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245, 243, 255, 0.95) 100%);
-      border-radius: 20px;
-      padding: 2.5rem;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-
-    .keunggulan-section::before {
-      content: '';
-      position: absolute;
+    .loader {
+      display: none;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" opacity="0.05"><path d="M50 0L100 50L50 100L0 50L50 0Z" fill="%236a1b9a"/></svg>');
-      background-size: 60px 60px;
-      z-index: -1;
-    }
-
-    .keunggulan-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: var(--primary);
-      text-align: center;
-      position: relative;
-      padding-bottom: 15px;
-    }
-
-    .keunggulan-section h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      border-radius: 2px;
-    }
-
-    .keunggulan-content {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #333;
-    }
-
-    .keunggulan-item {
-      margin-bottom: 1.5rem;
-      padding-left: 2rem;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .keunggulan-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.5rem;
-      width: 1rem;
-      height: 1rem;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      border-radius: 50%;
-    }
-
-    .keunggulan-item:hover {
-      transform: translateX(10px);
-    }
-
-    .keunggulan-highlight {
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-    }
-
-    .keunggulan-divider {
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--primary), transparent);
-      margin: 2rem 0;
-      border: none;
-    }
-
-    .keunggulan-price {
-      background: rgba(106, 27, 154, 0.1);
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin: 1.5rem 0;
-      border-left: 4px solid var(--primary);
-      transition: all 0.3s ease;
-    }
-
-    .keunggulan-price:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .keunggulan-price-title {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      display: flex;
+      background: rgba(255,255,255,0.8);
+      z-index: 9999;
+      justify-content: center;
       align-items: center;
     }
 
-    .keunggulan-price-title i {
-      margin-right: 10px;
-      color: var(--gold);
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--dp-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
     }
 
-    .keunggulan-price-desc {
-      padding-left: 1.5rem;
-    }
-
-    .keunggulan-cta {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .keunggulan-badge {
-      position: absolute;
-      top: -15px;
+    /* Language Switcher */
+    .language-switcher {
+      position: fixed;
+      top: 20px;
       right: 20px;
-      background: linear-gradient(to right, var(--secondary), #ff6b6b);
-      color: white;
-      padding: 0.5rem 1.5rem;
-      border-radius: 20px;
-      font-weight: 700;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      animation: pulse 1.5s infinite;
+      z-index: 1100;
+      display: flex;
+      gap: 10px;
     }
 
+    .language-btn {
+      background: white;
+      color: var(--ds-primary);
+      border: 2px solid var(--ds-primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .language-btn.active {
+      background: var(--ds-primary);
+      color: white;
+    }
+
+    .language-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 600px;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      animation: slideInUp 0.3s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #777;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--ds-primary);
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--ds-primary);
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--ds-primary), var(--ds-accent));
+      border-radius: 3px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(to right, var(--ds-primary), var(--ds-primary-dark));
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      font-family: 'Poppins', sans-serif;
+      resize: vertical;
+      min-height: 100px;
+      transition: all 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--ds-primary);
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    }
+
+    /* Shared Floating WhatsApp Button */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      z-index: 999;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive Styles */
     @media (max-width: 992px) {
       .sidebar {
         transform: translateX(-100%);
@@ -610,15 +998,11 @@
         transform: translateX(0);
       }
       
-      .main-content {
-        margin-left: 0;
-      }
-      
       .menu-toggle {
         display: block;
       }
       
-      header h1 {
+      .dp-header h1 {
         font-size: 2.2rem;
       }
 
@@ -629,7 +1013,27 @@
     }
 
     @media (max-width: 768px) {
-      header h1 {
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero, .contact-cta {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .dp-header h1 {
         font-size: 1.8rem;
       }
       
@@ -644,7 +1048,7 @@
         gap: 0.5rem;
       }
       
-      .button {
+      .dp-button {
         padding: 0.8rem 1.5rem;
       }
 
@@ -655,257 +1059,491 @@
       .keunggulan-content {
         font-size: 1rem;
       }
+
+      .language-switcher {
+        top: 80px;
+        right: 20px;
+      }
     }
 
-    /* Loading animation */
-    .loader {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,0.8);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero h2, .contact-cta h2 {
+        font-size: 1.4rem;
+      }
 
-    .loader-content {
-      text-align: center;
-    }
+      .hero p, .contact-cta p {
+        font-size: 1rem;
+      }
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid #f3f3f3;
-      border-top: 5px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
-    }
+      .package-card {
+        padding: 1.5rem;
+      }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      .floating-whatsapp {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+      }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <button class="menu-toggle ripple" onclick="toggleSidebar()">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <div class="sidebar">
-    <h2>Digital Pro</h2>
-    <a href="#" onclick="showForm()">
-      <i class="fas fa-user-plus"></i> Pendaftaran
-    </a>
-    <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">
-      <i class="fas fa-images"></i> Contoh Desain
-    </a>
-    <a href="https://drive.google.com/drive/folders/1r9ga93TSo4Hr2XdRtYckltxMulFNclAM?usp=sharing" target="_blank">
-      <i class="fas fa-comment-alt"></i> Testimoni
-    </a>
-    <a href="https://wa.me/6285928811220" target="_blank">
-      <i class="fab fa-whatsapp"></i> Chat Admin
-    </a>
+  <!-- Language Switcher -->
+  <div class="language-switcher">
+    <div class="language-btn active" onclick="changeLanguage('id')">ID</div>
+    <div class="language-btn" onclick="changeLanguage('en')">EN</div>
   </div>
 
-  <div class="main-content">
-    <header data-aos="fade-down">
-      <h1 class="animate__animated animate__fadeIn">🎨 Template Produk Digital Premium</h1>
-      <p class="animate__animated animate__fadeIn animate__delay-1s" style="color: #666; margin-top: 1rem;">Platform profesional untuk kebutuhan template digital Anda</p>
-    </header>
-
-    <div class="button-group" data-aos="fade-up" data-aos-delay="300">
-      <a class="button ripple" href="#" onclick="showForm()">
-        <i class="fas fa-rocket"></i> Pendaftaran
-      </a>
-      <button class="button ripple" onclick="refreshPage()">
-        <i class="fas fa-sync-alt"></i> Refresh Halaman
+  <!-- Digital Products Section -->
+  <section class="digital-products-section">
+    <div class="dp-container">
+      <button class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
       </button>
-    </div>
 
-    <section id="form-lanjutan" data-aos="zoom-in" data-aos-delay="500">
-      <h2>Formulir Pendaftaran</h2>
-      <form onsubmit="kirimWhatsApp(event)">
-        <div class="form-group" data-aos="fade-right" data-aos-delay="100">
-          <label for="nama">Nama Lengkap:</label>
-          <input type="text" id="nama" required>
-        </div>
+      <div class="sidebar">
+        <h2>Digital Pro</h2>
+        <a href="#" onclick="showForm()">
+          <i class="fas fa-user-plus"></i> Pendaftaran
+        </a>
+        <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">
+          <i class="fas fa-images"></i> Contoh Desain
+        </a>
+        <a href="https://drive.google.com/drive/folders/1r9ga93TSo4Hr2XdRtYckltxMulFNclAM?usp=sharing" target="_blank">
+          <i class="fas fa-comment-alt"></i> Testimoni
+        </a>
+        <a href="https://wa.me/6285928811220" target="_blank">
+          <i class="fab fa-whatsapp"></i> Chat Admin
+        </a>
+      </div>
 
-        <div class="form-group" data-aos="fade-left" data-aos-delay="150">
-          <label for="wa">Nomor WhatsApp:</label>
-          <input type="text" id="wa" required>
-        </div>
+      <div class="main-content">
+        <header class="dp-header" data-aos="fade-down">
+          <h1 class="animate__animated animate__fadeIn">🎨 Template Produk Digital Premium</h1>
+          <p class="animate__animated animate__fadeIn animate__delay-1s" style="color: #666; margin-top: 1rem;">Platform profesional untuk kebutuhan template digital Anda</p>
+        </header>
 
-        <div class="form-group" data-aos="fade-right" data-aos-delay="200">
-          <label for="paket">Pilih Paket:</label>
-          <select id="paket" required onchange="updateTotalPayment()" class="ripple">
-            <option value="">-- Pilih Paket --</option>
-            <option value="30000" data-max="3">Harga Semula ̶3̶4̶.̶9̶9̶9̶ Menjadi Rp30.000 / 1 Bulan</option>
-            <option value="50000" data-max="6">Harga Semula ̶5̶4̶.̶9̶9̶9̶ Menjadi Rp50.000 / 2 Bulan</option>
-            <option value="80000" data-max="9">Harga Semula ̶1̶0̶0̶.̶0̶0̶0̶ Menjadi Rp80.000 / 3 Bulan</option>
-          </select>
-        </div>
-
-        <div id="notification" class="notification hidden" data-aos="fade-up"></div>
-
-        <div data-aos="fade-up" data-aos-delay="250">
-          <label>Pilih Produk Awal:</label>
-          <div class="product-selection">
-            <div data-aos="fade-right" data-aos-delay="300">
-              <input type="number" id="cv-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()" class="ripple">
-              <label for="cv-count">CV</label>
-            </div>
-            <div data-aos="fade-right" data-aos-delay="350">
-              <input type="number" id="presentation-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()" class="ripple">
-              <label for="presentation-count">Presentation</label>
-            </div>
-            <div data-aos="fade-right" data-aos-delay="400">
-              <input type="number" id="portfolio-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()" class="ripple">
-              <label for="portfolio-count">Portfolio</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="tooltip" data-aos="fade-up" data-aos-delay="450">
-          <p style="color: var(--primary); font-size: 0.9rem;">
-            <i class="fas fa-info-circle"></i> Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. 
-            Namun, jika total produk yang dipilih melebihi batas paket, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.
-          </p>
-          <span class="tooltiptext">Biaya tambahan hanya berlaku untuk produk awal yang melebihi kuota paket</span>
-        </div>
-
-        <div class="form-group" data-aos="fade-left" data-aos-delay="500">
-          <label for="metode">Metode Pembayaran:</label>
-          <select id="metode" required onchange="updateRekening(); updateTotalPayment()" class="ripple">
-            <option value="">-- Pilih Metode --</option>
-            <option value="DANA">DANA</option>
-            <option value="Bank Mandiri">Bank Mandiri</option>
-          </select>
-        </div>
-
-        <div id="rekening" class="hidden" data-aos="fade-up" data-aos-delay="550">
-          <label>Nomor untuk Transfer:</label>
-          <div id="nomorRekening" style="font-weight: bold; font-size: 1.1rem; margin: 0.5rem 0;"></div>
-          <button type="button" class="copy-btn ripple" onclick="copyRekening()">
-            <i class="fas fa-copy"></i> Salin Nomor
+        <div class="button-group" data-aos="fade-up" data-aos-delay="300">
+          <a class="dp-button" href="#" onclick="showForm()">
+            <i class="fas fa-rocket"></i> Pendaftaran
+          </a>
+          <button class="dp-button" onclick="refreshPage()">
+            <i class="fas fa-sync-alt"></i> Refresh Halaman
           </button>
         </div>
 
-        <div class="form-group" data-aos="fade-right" data-aos-delay="600">
-          <label for="bukti">Upload Bukti Pembayaran (foto):</label>
-          <input type="file" id="bukti" required class="ripple">
-        </div>
+        <section id="form-lanjutan" data-aos="zoom-in" data-aos-delay="500">
+          <h2>Formulir Pendaftaran</h2>
+          <form onsubmit="kirimWhatsApp(event)">
+            <div class="form-group" data-aos="fade-right" data-aos-delay="100">
+              <label for="nama">Nama Lengkap:</label>
+              <input type="text" id="nama" required>
+            </div>
 
-        <div class="form-group" data-aos="fade-left" data-aos-delay="650">
-          <label for="kode">Buat Kode Referral Anda</label>
-          <input type="text" id="kode" placeholder="Contoh: NAMAKAMU25" required>
-        </div>
+            <div class="form-group" data-aos="fade-left" data-aos-delay="150">
+              <label for="wa">Nomor WhatsApp:</label>
+              <input type="text" id="wa" required>
+            </div>
 
-        <div class="form-group" data-aos="fade-right" data-aos-delay="700">
-          <label for="referral">Kode Referral Orang Lain (opsional)</label>
-          <input type="text" id="referral">
-        </div>
+            <div class="form-group" data-aos="fade-right" data-aos-delay="200">
+              <label for="paket">Pilih Paket:</label>
+              <select id="paket" required onchange="updateTotalPayment()">
+                <option value="">-- Pilih Paket --</option>
+                <option value="30000" data-max="3">Harga Semula ̶3̶4̶.̶9̶9̶9̶ Menjadi Rp30.000 / 1 Bulan</option>
+                <option value="50000" data-max="6">Harga Semula ̶5̶4̶.̶9̶9̶9̶ Menjadi Rp50.000 / 2 Bulan</option>
+                <option value="80000" data-max="9">Harga Semula ̶1̶0̶0̶.̶0̶0̶0̶ Menjadi Rp80.000 / 3 Bulan</option>
+              </select>
+            </div>
 
-        <div class="total-payment" id="total-payment" data-aos="fade-up" data-aos-delay="750"></div>
+            <div id="notification" class="notification hidden" data-aos="fade-up"></div>
 
-        <button type="submit" class="ripple" data-aos="zoom-in" data-aos-delay="800">
-          <i class="fas fa-paper-plane"></i> 🚀 Daftar Sekarang
-        </button>
-      </form>
+            <div data-aos="fade-up" data-aos-delay="250">
+              <label>Pilih Produk Awal:</label>
+              <div class="product-selection">
+                <div data-aos="fade-right" data-aos-delay="300">
+                  <input type="number" id="cv-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()">
+                  <label for="cv-count">CV</label>
+                </div>
+                <div data-aos="fade-right" data-aos-delay="350">
+                  <input type="number" id="presentation-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()">
+                  <label for="presentation-count">Presentation</label>
+                </div>
+                <div data-aos="fade-right" data-aos-delay="400">
+                  <input type="number" id="portfolio-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()">
+                  <label for="portfolio-count">Portfolio</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="tooltip" data-aos="fade-up" data-aos-delay="450">
+              <p style="color: var(--dp-primary); font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. 
+                Namun, jika total produk yang dipilih melebihi batas paket, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.
+              </p>
+              <span class="tooltiptext">Biaya tambahan hanya berlaku untuk produk awal yang melebihi kuota paket</span>
+            </div>
+
+            <div class="form-group" data-aos="fade-left" data-aos-delay="500">
+              <label for="metode">Metode Pembayaran:</label>
+              <select id="metode" required onchange="updateRekening(); updateTotalPayment()">
+                <option value="">-- Pilih Metode --</option>
+                <option value="DANA">DANA</option>
+                <option value="Bank Mandiri">Bank Mandiri</option>
+              </select>
+            </div>
+
+            <div id="rekening" class="hidden" data-aos="fade-up" data-aos-delay="550">
+              <label>Nomor untuk Transfer:</label>
+              <div id="nomorRekening" style="font-weight: bold; font-size: 1.1rem; margin: 0.5rem 0;"></div>
+              <button type="button" class="copy-btn" onclick="copyRekening()">
+                <i class="fas fa-copy"></i> Salin Nomor
+              </button>
+            </div>
+
+            <div class="form-group" data-aos="fade-right" data-aos-delay="600">
+              <label for="bukti">Upload Bukti Pembayaran (foto):</label>
+              <input type="file" id="bukti" required>
+            </div>
+
+            <div class="form-group" data-aos="fade-left" data-aos-delay="650">
+              <label for="kode">Buat Kode Referral Anda</label>
+              <input type="text" id="kode" placeholder="Contoh: NAMAKAMU25" required>
+            </div>
+
+            <div class="form-group" data-aos="fade-right" data-aos-delay="700">
+              <label for="referral">Kode Referral Orang Lain (opsional)</label>
+              <input type="text" id="referral">
+            </div>
+
+            <div class="total-payment" id="total-payment" data-aos="fade-up" data-aos-delay="750"></div>
+
+            <button type="submit" data-aos="zoom-in" data-aos-delay="800">
+              <i class="fas fa-paper-plane"></i> 🚀 Daftar Sekarang
+            </button>
+          </form>
+        </section>
+
+        <!-- Keunggulan Section -->
+        <section class="keunggulan-section" data-aos="fade-up" data-aos-delay="300">
+          <span class="keunggulan-badge">LIMITED OFFER!</span>
+          <h2>KEUNGGULAN PRODUK KAMI</h2>
+          
+          <div class="keunggulan-content">
+            <div class="keunggulan-item" data-aos="fade-right">
+              <span class="keunggulan-highlight">📍 KOMUNITAS TEMPLATE DAN PRODUK DIGITAL</span><br>
+              <span class="keunggulan-highlight">💡 Template Presentasi, CV, Portofolio Berkualitas PREMIUM !!💎💎</span>
+            </div>
+
+            <div class="keunggulan-item" data-aos="fade-left" data-aos-delay="100">
+              <span class="keunggulan-highlight">📢 MAU DAPET TEMPLATE KEREN TIAP MINGGU?</span>
+            </div>
+
+            <div class="keunggulan-item" data-aos="fade-right" data-aos-delay="200">
+              <span class="keunggulan-highlight">📌 Cocok buat:</span><br>
+              📝 Pelajar / Mahasiswa<br>
+              💻 Kreator Pemula<br>
+              🧠 Pekerja Kreatif<br>
+              📈 Yang Mau Bangun Personal Brand
+            </div>
+
+            <div class="keunggulan-item" data-aos="fade-left" data-aos-delay="300">
+              Bayangin kalau kamu bisa:<br><br>
+              ✅ <strong>Pilih Template Presentasi, CV Kerja, Portofolio Premium</strong><br>
+              ✅ <strong>Bikin presentasi tugas sekolah/kampus lebih kece</strong><br>
+              ✅ <strong>Punya CV kerja yang dilirik HRD</strong><br>
+              ✅ <strong>Dapat desain digital siap pakai tanpa repot</strong><br>
+              ✅ <strong>Bisa kalian Jual Ulang Loh</strong><br>
+              ✅ <strong>Template Yang Dapat Di Akses Full</strong><br>
+              ✅ <strong>Voting: Tentukan Konten Minggu Depan</strong><br>
+              ✅ <strong>Semua itu kamu dapat… cuma dari 1 grup!</strong>
+            </div>
+
+            <hr class="keunggulan-divider">
+
+            <div class="keunggulan-price" data-aos="zoom-in">
+              <div class="keunggulan-price-title">
+                <i class="fas fa-gem"></i> 💰 Hanya Rp30.000 / 1 bulan, Harga Semula <del>34.999</del>
+              </div>
+              <div class="keunggulan-price-desc">
+                🎁 3 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
+                🎁 Total 7 Produk / Template Digital Baru Dalam 1 Bulan
+              </div>
+            </div>
+
+            <div class="keunggulan-price" data-aos="zoom-in" data-aos-delay="100">
+              <div class="keunggulan-price-title">
+                <i class="fas fa-gem"></i> 💰 Hanya Rp50.000 / 2 bulan, Harga Semula <del>69.999</del>
+              </div>
+              <div class="keunggulan-price-desc">
+                🎁 6 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
+                🎁 Total 14 Produk / Template Digital Baru Dalam 2 Bulan
+              </div>
+            </div>
+
+            <div class="keunggulan-price" data-aos="zoom-in" data-aos-delay="200">
+              <div class="keunggulan-price-title">
+                <i class="fas fa-gem"></i> 💰 Hanya Rp80.000 / 3 bulan, Harga Semula <del>105.999</del>
+              </div>
+              <div class="keunggulan-price-desc">
+                🎁 9 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
+                🎁 Total 21 Produk / Template Digital Baru Dalam 3 Bulan
+              </div>
+            </div>
+
+            <hr class="keunggulan-divider">
+
+            <div class="keunggulan-item" data-aos="fade-up">
+              ⚠ <span class="keunggulan-highlight">Terbatas!</span><br>
+              🪩 Hanya untuk yang serius ingin berkembang
+            </div>
+
+            <div class="keunggulan-cta" data-aos="zoom-in">
+              <a href="#" onclick="showForm()" class="dp-button" style="max-width: 300px; margin: 0 auto;">
+                <i class="fas fa-crown"></i> DAFTAR SEKARANG
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design Services Section -->
+  <div class="container design-services-section">
+    <!-- Header -->
+    <div class="header">
+      <h1>Professional Design Services</h1>
+      <p>High-quality design solutions to elevate your brand. Fast turnaround, affordable prices, and stunning results.</p>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Get Premium Designs Starting at Rp20K</h2>
+        <p>Join 500+ satisfied clients who transformed their visual identity with our design services</p>
+        <a href="#packages" class="button">
+          <i class="fas fa-pencil-ruler"></i> View Packages
+        </a>
+      </div>
     </section>
 
-    <!-- Keunggulan Section -->
-    <section class="keunggulan-section" data-aos="fade-up" data-aos-delay="300">
-      <span class="keunggulan-badge">LIMITED OFFER!</span>
-      <h2>KEUNGGULAN PRODUK KAMI</h2>
-      
-      <div class="keunggulan-content">
-        <div class="keunggulan-item" data-aos="fade-right">
-          <span class="keunggulan-highlight">📍 KOMUNITAS TEMPLATE DAN PRODUK DIGITAL</span><br>
-          <span class="keunggulan-highlight">💡 Template Presentasi, CV, Portofolio Berkualitas PREMIUM !!💎💎</span>
-        </div>
-
-        <div class="keunggulan-item" data-aos="fade-left" data-aos-delay="100">
-          <span class="keunggulan-highlight">📢 MAU DAPET TEMPLATE KEREN TIAP MINGGU?</span>
-        </div>
-
-        <div class="keunggulan-item" data-aos="fade-right" data-aos-delay="200">
-          <span class="keunggulan-highlight">📌 Cocok buat:</span><br>
-          📝 Pelajar / Mahasiswa<br>
-          💻 Kreator Pemula<br>
-          🧠 Pekerja Kreatif<br>
-          📈 Yang Mau Bangun Personal Brand
-        </div>
-
-        <div class="keunggulan-item" data-aos="fade-left" data-aos-delay="300">
-          Bayangin kalau kamu bisa:<br><br>
-          ✅ <strong>Pilih Template Presentasi, CV Kerja, Portofolio Premium</strong><br>
-          ✅ <strong>Bikin presentasi tugas sekolah/kampus lebih kece</strong><br>
-          ✅ <strong>Punya CV kerja yang dilirik HRD</strong><br>
-          ✅ <strong>Dapat desain digital siap pakai tanpa repot</strong><br>
-          ✅ <strong>Bisa kalian Jual Ulang Loh</strong><br>
-          ✅ <strong>Template Yang Dapat Di Akses Full</strong><br>
-          ✅ <strong>Voting: Tentukan Konten Minggu Depan</strong><br>
-          ✅ <strong>Semua itu kamu dapat… cuma dari 1 grup!</strong>
-        </div>
-
-        <hr class="keunggulan-divider">
-
-        <div class="keunggulan-price" data-aos="zoom-in">
-          <div class="keunggulan-price-title">
-            <i class="fas fa-gem"></i> 💰 Hanya Rp30.000 / 1 bulan, Harga Semula <del>34.999</del>
+    <!-- Design Packages -->
+    <section class="packages-section" id="packages">
+      <h2 class="section-title">Our Design Packages</h2>
+      <div class="packages-grid">
+        <!-- Logo Design -->
+        <div class="package-card" data-aos="fade-up">
+          <div class="package-icon">
+            <i class="fas fa-signature"></i>
           </div>
-          <div class="keunggulan-price-desc">
-            🎁 3 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
-            🎁 Total 7 Produk / Template Digital Baru Dalam 1 Bulan
-          </div>
+          <h3 class="package-name">Logo Design</h3>
+          <div class="package-price">Rp50K-100K</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Professional logo concept</li>
+            <li><i class="fas fa-check"></i> 3 initial drafts</li>
+            <li><i class="fas fa-check"></i> 2 revisions</li>
+            <li><i class="fas fa-check"></i> Source files included</li>
+          </ul>
+          <button class="package-button" onclick="openOrderModal('Logo Design')">
+            Order Now
+          </button>
         </div>
 
-        <div class="keunggulan-price" data-aos="zoom-in" data-aos-delay="100">
-          <div class="keunggulan-price-title">
-            <i class="fas fa-gem"></i> 💰 Hanya Rp50.000 / 2 bulan, Harga Semula <del>69.999</del>
+        <!-- Poster Design -->
+        <div class="package-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="package-icon" style="background: var(--ds-accent);">
+            <i class="fas fa-newspaper"></i>
           </div>
-          <div class="keunggulan-price-desc">
-            🎁 6 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
-            🎁 Total 14 Produk / Template Digital Baru Dalam 2 Bulan
-          </div>
+          <h3 class="package-name">Poster Design</h3>
+          <div class="package-price">Rp50K</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Eye-catching layout</li>
+            <li><i class="fas fa-check"></i> Print-ready file</li>
+            <li><i class="fas fa-check"></i> Social media version</li>
+            <li><i class="fas fa-check"></i> 1 revision</li>
+          </ul>
+          <button class="package-button" style="background: var(--ds-accent);" onclick="openOrderModal('Poster Design')">
+            Order Now
+          </button>
         </div>
 
-        <div class="keunggulan-price" data-aos="zoom-in" data-aos-delay="200">
-          <div class="keunggulan-price-title">
-            <i class="fas fa-gem"></i> 💰 Hanya Rp80.000 / 3 bulan, Harga Semula <del>105.999</del>
+        <!-- Banner Design -->
+        <div class="package-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="package-icon" style="background: var(--ds-secondary);">
+            <i class="fas fa-scroll"></i>
           </div>
-          <div class="keunggulan-price-desc">
-            🎁 9 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
-            🎁 Total 21 Produk / Template Digital Baru Dalam 3 Bulan
-          </div>
+          <h3 class="package-name">Banner Design</h3>
+          <div class="package-price">Rp30K-50K</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Custom size banner</li>
+            <li><i class="fas fa-check"></i> High-resolution</li>
+            <li><i class="fas fa-check"></i> Print-ready file</li>
+            <li><i class="fas fa-check"></i> 1 revision</li>
+          </ul>
+          <button class="package-button" style="background: var(--ds-secondary);" onclick="openOrderModal('Banner Design')">
+            Order Now
+          </button>
         </div>
 
-        <hr class="keunggulan-divider">
-
-        <div class="keunggulan-item" data-aos="fade-up">
-          ⚠ <span class="keunggulan-highlight">Terbatas!</span><br>
-          🪩 Hanya untuk yang serius ingin berkembang
+        <!-- Instagram Post -->
+        <div class="package-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="package-icon" style="background: #e84393;">
+            <i class="fas fa-instagram"></i>
+          </div>
+          <h3 class="package-name">Instagram Post</h3>
+          <div class="package-price">Rp20K</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> Square/Story format</li>
+            <li><i class="fas fa-check"></i> Engaging visuals</li>
+            <li><i class="fas fa-check"></i> Ready to post</li>
+            <li><i class="fas fa-check"></i> 1 revision</li>
+          </ul>
+          <button class="package-button" style="background: #e84393;" onclick="openOrderModal('Instagram Post')">
+            Order Now
+          </button>
         </div>
 
-        <div class="keunggulan-cta" data-aos="zoom-in">
-          <a href="#" onclick="showForm()" class="button ripple" style="max-width: 300px; margin: 0 auto;">
-            <i class="fas fa-crown"></i> DAFTAR SEKARANG
-          </a>
+        <!-- Company Profile -->
+        <div class="package-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="package-icon" style="background: #0984e3;">
+            <i class="fas fa-building"></i>
+          </div>
+          <h3 class="package-name">Company Profile</h3>
+          <div class="package-price">Rp150K-300K</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> 8-12 pages</li>
+            <li><i class="fas fa-check"></i> Print & digital versions</li>
+            <li><i class="fas fa-check"></i> 3 concepts</li>
+            <li><i class="fas fa-check"></i> Custom illustrations</li>
+          </ul>
+          <button class="package-button" style="background: #0984e3;" onclick="openOrderModal('Company Profile')">
+            Order Now
+          </button>
+        </div>
+
+        <!-- Merch Design -->
+        <div class="package-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="package-icon" style="background: #00b894;">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <h3 class="package-name">Merch Design</h3>
+          <div class="package-price">Rp80K-150K</div>
+          <ul class="package-features">
+            <li><i class="fas fa-check"></i> T-shirt/tote bag design</li>
+            <li><i class="fas fa-check"></i> Print-ready file</li>
+            <li><i class="fas fa-check"></i> 3 concepts</li>
+            <li><i class="fas fa-check"></i> Source files</li>
+          </ul>
+          <button class="package-button" style="background: #00b894;" onclick="openOrderModal('Merch Design')">
+            Order Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card" data-aos="fade-up">
+          <p class="testimonial-text">"The logo design exceeded my expectations. Received 3 amazing concepts and the final result perfectly represents my brand."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">BS</div>
+            <div class="author-info">
+              <h4>Budi Santoso</h4>
+              <p>Owner, Kafe Nyaman</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+          <p class="testimonial-text">"Fast turnaround for our event banners. The designer understood exactly what we needed and delivered print-ready files."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">UB</div>
+            <div class="author-info">
+              <h4>Universitas Brawijaya</h4>
+              <p>Event Committee</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+          <p class="testimonial-text">"Our Instagram engagement doubled after using their post designs. Highly recommend for social media content!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SN</div>
+            <div class="author-info">
+              <h4>Siti Nurhaliza</h4>
+              <p>Influencer</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </div>
 
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/6285928811220" class="floating-whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Order Modal -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h2 class="modal-title" id="modalPackageTitle">Order Form</h2>
+      <form id="orderForm">
+        <input type="hidden" id="selectedPackage">
+        
+        <div class="form-group">
+          <label for="customerName">Full Name</label>
+          <input type="text" id="customerName" required placeholder="Your full name">
+        </div>
+        
+        <div class="form-group">
+          <label for="whatsappNumber">WhatsApp Number</label>
+          <input type="tel" id="whatsappNumber" required placeholder="e.g. 628123456789">
+        </div>
+        
+        <div class="form-group">
+          <label for="customerEmail">Email (Optional)</label>
+          <input type="email" id="customerEmail" placeholder="your@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="designReference">Design Reference (URL or Description)</label>
+          <textarea id="designReference" placeholder="Paste link to reference images or describe what you want"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="designDescription">Detailed Description</label>
+          <textarea id="designDescription" placeholder="Describe your design needs in detail..." required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Send Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Floating Notification -->
   <div class="floating-notification" id="floating-notification">
     <i class="fas fa-bell"></i> Dapatkan diskon 10% untuk pendaftaran hari ini!
   </div>
 
+  <!-- Loader -->
   <div class="loader" id="loader">
     <div class="loader-content">
       <div class="spinner"></div>
@@ -913,7 +1551,9 @@
     </div>
   </div>
 
+  <!-- Combined JavaScript Libraries -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
   <script>
     // Initialize animations
     AOS.init({
@@ -922,6 +1562,83 @@
       easing: 'ease-in-out-quad'
     });
 
+    // Language Switcher Function
+    function changeLanguage(lang) {
+      const buttons = document.querySelectorAll('.language-btn');
+      buttons.forEach(btn => {
+        if (btn.textContent === lang.toUpperCase()) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Here you would typically load language-specific content
+      // For this example, we'll just show an alert
+      if (lang === 'id') {
+        alert('Mengubah bahasa ke Indonesia');
+      } else {
+        alert('Changing language to English');
+      }
+    }
+
+    // =====================================
+    // DESIGN SERVICES FUNCTIONS
+    // =====================================
+    // Open Order Modal
+    function openOrderModal(packageName) {
+      document.getElementById('selectedPackage').value = packageName;
+      document.getElementById('modalPackageTitle').textContent = `Order ${packageName}`;
+      document.getElementById('orderModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close Modal
+    function closeModal() {
+      document.getElementById('orderModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Submit Order Form
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const packageName = document.getElementById('selectedPackage').value;
+      const name = document.getElementById('customerName').value;
+      const whatsapp = document.getElementById('whatsappNumber').value;
+      const email = document.getElementById('customerEmail').value || 'Not provided';
+      const reference = document.getElementById('designReference').value || 'No reference';
+      const description = document.getElementById('designDescription').value;
+      
+      const whatsappMessage = `📋 *NEW DESIGN ORDER* 📋
+
+🎨 *Package*: ${packageName}
+👤 *Name*: ${name}
+📞 *WhatsApp*: ${whatsapp}
+📧 *Email*: ${email}
+
+🖼 *Design Reference*:
+${reference}
+
+📝 *Project Details*:
+${description}
+
+💬 *Please confirm receipt of this order*`;
+
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      window.open(`https://wa.me/6285928811220?text=${encodedMessage}`, '_blank');
+      
+      // Reset form
+      this.reset();
+      closeModal();
+      
+      // Show confirmation
+      alert('Order sent successfully! We will contact you shortly via WhatsApp.');
+    });
+
+    // =====================================
+    // DIGITAL PRODUCTS FUNCTIONS
+    // =====================================
     // Show floating notification after delay
     setTimeout(() => {
       const notification = document.getElementById('floating-notification');
@@ -1083,33 +1800,46 @@
       }, 1500);
     }
 
-    // Add ripple effect to all buttons
-    document.addEventListener('DOMContentLoaded', function() {
-      const buttons = document.querySelectorAll('.ripple');
-      buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-          const rect = this.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          
-          const ripple = document.createElement('span');
-          ripple.className = 'ripple-effect';
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-          
-          this.appendChild(ripple);
-          
-          setTimeout(() => {
-            ripple.remove();
-          }, 1000);
-        });
-      });
-      
-      // Show form if there's a hash in URL
-      if (window.location.hash === '#daftar') {
-        showForm();
+    // Shared Event Listeners
+    window.addEventListener('click', function(e) {
+      // Close modal when clicking outside
+      if (e.target === document.getElementById('orderModal')) {
+        closeModal();
       }
     });
+
+    document.addEventListener('keydown', function(e) {
+      // Close modal with Escape key
+      if (e.key === 'Escape' && document.getElementById('orderModal').style.display === 'flex') {
+        closeModal();
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Form validation
+    const whatsappInput = document.getElementById('whatsappNumber');
+    if (whatsappInput) {
+      whatsappInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
+    }
+
+    // Show form if there's a hash in URL
+    if (window.location.hash === '#daftar') {
+      showForm();
+    }
   </script>
 </body>
 </html>
