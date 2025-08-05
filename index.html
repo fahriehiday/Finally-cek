@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DesignJockey | Professional Design Services & Digital Products</title>
-  <meta name="description" content="High-quality design services and premium digital templates including logo design, posters, banners, CV templates and presentation designs.">
+  <title>DesignJockey | Layanan Desain Profesional & Produk Digital</title>
+  <meta name="description" content="Layanan desain berkualitas tinggi dan template digital premium termasuk desain logo, poster, banner, template CV, dan desain presentasi.">
   
   <!-- Combined Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -55,7 +55,7 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     .section-title {
@@ -109,7 +109,7 @@
     .dp-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1rem;
     }
 
     .sidebar {
@@ -168,7 +168,7 @@
 
     .main-content {
       margin-left: 0;
-      padding: 2rem;
+      padding: 1rem;
       transition: margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -191,7 +191,7 @@
     }
 
     .dp-header h1 {
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       font-weight: 700;
       background: linear-gradient(to right, var(--dp-primary), var(--dp-secondary));
       -webkit-background-clip: text;
@@ -238,9 +238,9 @@
     #form-lanjutan {
       display: none;
       background-color: rgba(255, 255, 255, 0.95);
-      max-width: 700px;
+      width: calc(100% - 2rem);
       margin: 3rem auto;
-      padding: 2.5rem;
+      padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
       backdrop-filter: blur(10px);
@@ -248,7 +248,7 @@
     }
 
     #form-lanjutan h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
       color: var(--dp-primary);
       text-align: center;
@@ -529,7 +529,7 @@
     .hero {
       background: linear-gradient(135deg, var(--ds-primary), var(--ds-primary-dark));
       color: white;
-      padding: 4rem 2rem;
+      padding: 4rem 1rem;
       border-radius: 16px;
       margin-bottom: 3rem;
       text-align: center;
@@ -565,7 +565,7 @@
     }
 
     .hero h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       margin-bottom: 1.5rem;
       line-height: 1.3;
     }
@@ -799,41 +799,6 @@
       margin: 0 auto 20px;
     }
 
-    /* Language Switcher */
-    .language-switcher {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1100;
-      display: flex;
-      gap: 10px;
-    }
-
-    .language-btn {
-      background: white;
-      color: var(--ds-primary);
-      border: 2px solid var(--ds-primary);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .language-btn.active {
-      background: var(--ds-primary);
-      color: white;
-    }
-
-    .language-btn:hover {
-      transform: scale(1.1);
-    }
-
     /* Modal Styles */
     .modal {
       display: none;
@@ -852,7 +817,7 @@
     .modal-content {
       background: white;
       border-radius: 16px;
-      width: 90%;
+      width: calc(100% - 2rem);
       max-width: 600px;
       padding: 2rem;
       position: relative;
@@ -1003,7 +968,7 @@
       }
       
       .dp-header h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
 
       .keunggulan-section {
@@ -1025,12 +990,12 @@
         grid-template-columns: 1fr;
       }
 
-      .hero, .contact-cta {
-        padding: 2.5rem 1.5rem;
+      .hero {
+        padding: 2.5rem 1rem;
       }
 
       .container {
-        padding: 1.5rem;
+        padding: 1rem;
       }
       
       .dp-header h1 {
@@ -1040,6 +1005,7 @@
       #form-lanjutan {
         padding: 1.5rem;
         margin: 2rem auto;
+        width: calc(100% - 2rem);
       }
       
       .product-selection div {
@@ -1060,9 +1026,12 @@
         font-size: 1rem;
       }
 
-      .language-switcher {
-        top: 80px;
-        right: 20px;
+      .modal-content {
+        padding: 1.5rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
       }
     }
 
@@ -1071,11 +1040,11 @@
         font-size: 1.8rem;
       }
       
-      .hero h2, .contact-cta h2 {
+      .hero h2 {
         font-size: 1.4rem;
       }
 
-      .hero p, .contact-cta p {
+      .hero p {
         font-size: 1rem;
       }
 
@@ -1091,23 +1060,13 @@
         right: 20px;
       }
 
-      .modal-content {
-        padding: 1.5rem;
-      }
-
-      .modal-title {
-        font-size: 1.5rem;
+      #form-lanjutan {
+        padding: 1.5rem 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Language Switcher -->
-  <div class="language-switcher">
-    <div class="language-btn active" onclick="changeLanguage('id')">ID</div>
-    <div class="language-btn" onclick="changeLanguage('en')">EN</div>
-  </div>
-
   <!-- Digital Products Section -->
   <section class="digital-products-section">
     <div class="dp-container">
@@ -1326,40 +1285,40 @@
   <div class="container design-services-section">
     <!-- Header -->
     <div class="header">
-      <h1>Professional Design Services</h1>
-      <p>High-quality design solutions to elevate your brand. Fast turnaround, affordable prices, and stunning results.</p>
+      <h1>Layanan Desain Profesional</h1>
+      <p>Solusi desain berkualitas tinggi untuk meningkatkan merek Anda. Waktu pengerjaan cepat, harga terjangkau, dan hasil yang memukau.</p>
     </div>
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h2>Get Premium Designs Starting at Rp20K</h2>
-        <p>Join 500+ satisfied clients who transformed their visual identity with our design services</p>
+        <h2>Dapatkan Desain Premium Mulai dari Rp20K</h2>
+        <p>Bergabunglah dengan 500+ klien puas yang mengubah identitas visual mereka dengan layanan desain kami</p>
         <a href="#packages" class="button">
-          <i class="fas fa-pencil-ruler"></i> View Packages
+          <i class="fas fa-pencil-ruler"></i> Lihat Paket
         </a>
       </div>
     </section>
 
     <!-- Design Packages -->
     <section class="packages-section" id="packages">
-      <h2 class="section-title">Our Design Packages</h2>
+      <h2 class="section-title">Paket Desain Kami</h2>
       <div class="packages-grid">
         <!-- Logo Design -->
         <div class="package-card" data-aos="fade-up">
           <div class="package-icon">
             <i class="fas fa-signature"></i>
           </div>
-          <h3 class="package-name">Logo Design</h3>
+          <h3 class="package-name">Desain Logo</h3>
           <div class="package-price">Rp50K-100K</div>
           <ul class="package-features">
-            <li><i class="fas fa-check"></i> Professional logo concept</li>
-            <li><i class="fas fa-check"></i> 3 initial drafts</li>
-            <li><i class="fas fa-check"></i> 2 revisions</li>
-            <li><i class="fas fa-check"></i> Source files included</li>
+            <li><i class="fas fa-check"></i> Konsep logo profesional</li>
+            <li><i class="fas fa-check"></i> 3 draft awal</li>
+            <li><i class="fas fa-check"></i> 2 revisi</li>
+            <li><i class="fas fa-check"></i> File sumber termasuk</li>
           </ul>
-          <button class="package-button" onclick="openOrderModal('Logo Design')">
-            Order Now
+          <button class="package-button" onclick="openOrderModal('Desain Logo')">
+            Pesan Sekarang
           </button>
         </div>
 
@@ -1368,16 +1327,16 @@
           <div class="package-icon" style="background: var(--ds-accent);">
             <i class="fas fa-newspaper"></i>
           </div>
-          <h3 class="package-name">Poster Design</h3>
+          <h3 class="package-name">Desain Poster</h3>
           <div class="package-price">Rp50K</div>
           <ul class="package-features">
-            <li><i class="fas fa-check"></i> Eye-catching layout</li>
-            <li><i class="fas fa-check"></i> Print-ready file</li>
-            <li><i class="fas fa-check"></i> Social media version</li>
-            <li><i class="fas fa-check"></i> 1 revision</li>
+            <li><i class="fas fa-check"></i> Tata letak yang menarik</li>
+            <li><i class="fas fa-check"></i> File siap cetak</li>
+            <li><i class="fas fa-check"></i> Versi media sosial</li>
+            <li><i class="fas fa-check"></i> 1 revisi</li>
           </ul>
-          <button class="package-button" style="background: var(--ds-accent);" onclick="openOrderModal('Poster Design')">
-            Order Now
+          <button class="package-button" style="background: var(--ds-accent);" onclick="openOrderModal('Desain Poster')">
+            Pesan Sekarang
           </button>
         </div>
 
@@ -1386,16 +1345,16 @@
           <div class="package-icon" style="background: var(--ds-secondary);">
             <i class="fas fa-scroll"></i>
           </div>
-          <h3 class="package-name">Banner Design</h3>
+          <h3 class="package-name">Desain Banner</h3>
           <div class="package-price">Rp30K-50K</div>
           <ul class="package-features">
-            <li><i class="fas fa-check"></i> Custom size banner</li>
-            <li><i class="fas fa-check"></i> High-resolution</li>
-            <li><i class="fas fa-check"></i> Print-ready file</li>
-            <li><i class="fas fa-check"></i> 1 revision</li>
+            <li><i class="fas fa-check"></i> Banner ukuran custom</li>
+            <li><i class="fas fa-check"></i> Resolusi tinggi</li>
+            <li><i class="fas fa-check"></i> File siap cetak</li>
+            <li><i class="fas fa-check"></i> 1 revisi</li>
           </ul>
-          <button class="package-button" style="background: var(--ds-secondary);" onclick="openOrderModal('Banner Design')">
-            Order Now
+          <button class="package-button" style="background: var(--ds-secondary);" onclick="openOrderModal('Desain Banner')">
+            Pesan Sekarang
           </button>
         </div>
 
@@ -1404,16 +1363,16 @@
           <div class="package-icon" style="background: #e84393;">
             <i class="fas fa-instagram"></i>
           </div>
-          <h3 class="package-name">Instagram Post</h3>
+          <h3 class="package-name">Postingan Instagram</h3>
           <div class="package-price">Rp20K</div>
           <ul class="package-features">
-            <li><i class="fas fa-check"></i> Square/Story format</li>
-            <li><i class="fas fa-check"></i> Engaging visuals</li>
-            <li><i class="fas fa-check"></i> Ready to post</li>
-            <li><i class="fas fa-check"></i> 1 revision</li>
+            <li><i class="fas fa-check"></i> Format persegi/Story</li>
+            <li><i class="fas fa-check"></i> Visual yang menarik</li>
+            <li><i class="fas fa-check"></i> Siap diposting</li>
+            <li><i class="fas fa-check"></i> 1 revisi</li>
           </ul>
-          <button class="package-button" style="background: #e84393;" onclick="openOrderModal('Instagram Post')">
-            Order Now
+          <button class="package-button" style="background: #e84393;" onclick="openOrderModal('Postingan Instagram')">
+            Pesan Sekarang
           </button>
         </div>
 
@@ -1422,16 +1381,16 @@
           <div class="package-icon" style="background: #0984e3;">
             <i class="fas fa-building"></i>
           </div>
-          <h3 class="package-name">Company Profile</h3>
+          <h3 class="package-name">Profil Perusahaan</h3>
           <div class="package-price">Rp150K-300K</div>
           <ul class="package-features">
-            <li><i class="fas fa-check"></i> 8-12 pages</li>
-            <li><i class="fas fa-check"></i> Print & digital versions</li>
-            <li><i class="fas fa-check"></i> 3 concepts</li>
-            <li><i class="fas fa-check"></i> Custom illustrations</li>
+            <li><i class="fas fa-check"></i> 8-12 halaman</li>
+            <li><i class="fas fa-check"></i> Versi cetak & digital</li>
+            <li><i class="fas fa-check"></i> 3 konsep</li>
+            <li><i class="fas fa-check"></i> Ilustrasi custom</li>
           </ul>
-          <button class="package-button" style="background: #0984e3;" onclick="openOrderModal('Company Profile')">
-            Order Now
+          <button class="package-button" style="background: #0984e3;" onclick="openOrderModal('Profil Perusahaan')">
+            Pesan Sekarang
           </button>
         </div>
 
@@ -1440,16 +1399,16 @@
           <div class="package-icon" style="background: #00b894;">
             <i class="fas fa-tshirt"></i>
           </div>
-          <h3 class="package-name">Merch Design</h3>
+          <h3 class="package-name">Desain Merchandise</h3>
           <div class="package-price">Rp80K-150K</div>
           <ul class="package-features">
-            <li><i class="fas fa-check"></i> T-shirt/tote bag design</li>
-            <li><i class="fas fa-check"></i> Print-ready file</li>
-            <li><i class="fas fa-check"></i> 3 concepts</li>
-            <li><i class="fas fa-check"></i> Source files</li>
+            <li><i class="fas fa-check"></i> Desain kaung/tote bag</li>
+            <li><i class="fas fa-check"></i> File siap cetak</li>
+            <li><i class="fas fa-check"></i> 3 konsep</li>
+            <li><i class="fas fa-check"></i> File sumber</li>
           </ul>
-          <button class="package-button" style="background: #00b894;" onclick="openOrderModal('Merch Design')">
-            Order Now
+          <button class="package-button" style="background: #00b894;" onclick="openOrderModal('Desain Merchandise')">
+            Pesan Sekarang
           </button>
         </div>
       </div>
@@ -1457,30 +1416,30 @@
 
     <!-- Testimonials -->
     <section class="testimonials">
-      <h2 class="section-title">What Our Clients Say</h2>
+      <h2 class="section-title">Apa Kata Klien Kami</h2>
       <div class="testimonial-grid">
         <div class="testimonial-card" data-aos="fade-up">
-          <p class="testimonial-text">"The logo design exceeded my expectations. Received 3 amazing concepts and the final result perfectly represents my brand."</p>
+          <p class="testimonial-text">"Desain logo melebihi ekspektasi saya. Menerima 3 konsep menakjubkan dan hasil akhirnya mewakili merek dengan sempurna."</p>
           <div class="testimonial-author">
             <div class="author-avatar">BS</div>
             <div class="author-info">
               <h4>Budi Santoso</h4>
-              <p>Owner, Kafe Nyaman</p>
+              <p>Pemilik, Kafe Nyaman</p>
             </div>
           </div>
         </div>
         <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-          <p class="testimonial-text">"Fast turnaround for our event banners. The designer understood exactly what we needed and delivered print-ready files."</p>
+          <p class="testimonial-text">"Pengerjaan cepat untuk banner acara kami. Desainer memahami persis apa yang kami butuhkan dan memberikan file siap cetak."</p>
           <div class="testimonial-author">
             <div class="author-avatar">UB</div>
             <div class="author-info">
               <h4>Universitas Brawijaya</h4>
-              <p>Event Committee</p>
+              <p>Panitia Acara</p>
             </div>
           </div>
         </div>
         <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-          <p class="testimonial-text">"Our Instagram engagement doubled after using their post designs. Highly recommend for social media content!"</p>
+          <p class="testimonial-text">"Engagement Instagram kami berlipat ganda setelah menggunakan desain postingan mereka. Sangat direkomendasikan untuk konten media sosial!"</p>
           <div class="testimonial-author">
             <div class="author-avatar">SN</div>
             <div class="author-info">
@@ -1502,37 +1461,37 @@
   <div class="modal" id="orderModal">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal()">&times;</span>
-      <h2 class="modal-title" id="modalPackageTitle">Order Form</h2>
+      <h2 class="modal-title" id="modalPackageTitle">Formulir Pemesanan</h2>
       <form id="orderForm">
         <input type="hidden" id="selectedPackage">
         
         <div class="form-group">
-          <label for="customerName">Full Name</label>
-          <input type="text" id="customerName" required placeholder="Your full name">
+          <label for="customerName">Nama Lengkap</label>
+          <input type="text" id="customerName" required placeholder="Nama lengkap Anda">
         </div>
         
         <div class="form-group">
-          <label for="whatsappNumber">WhatsApp Number</label>
-          <input type="tel" id="whatsappNumber" required placeholder="e.g. 628123456789">
+          <label for="whatsappNumber">Nomor WhatsApp</label>
+          <input type="tel" id="whatsappNumber" required placeholder="Contoh: 628123456789">
         </div>
         
         <div class="form-group">
-          <label for="customerEmail">Email (Optional)</label>
-          <input type="email" id="customerEmail" placeholder="your@email.com">
+          <label for="customerEmail">Email (Opsional)</label>
+          <input type="email" id="customerEmail" placeholder="email@anda.com">
         </div>
         
         <div class="form-group">
-          <label for="designReference">Design Reference (URL or Description)</label>
-          <textarea id="designReference" placeholder="Paste link to reference images or describe what you want"></textarea>
+          <label for="designReference">Referensi Desain (URL atau Deskripsi)</label>
+          <textarea id="designReference" placeholder="Tempel link referensi gambar atau jelaskan yang Anda inginkan"></textarea>
         </div>
         
         <div class="form-group">
-          <label for="designDescription">Detailed Description</label>
-          <textarea id="designDescription" placeholder="Describe your design needs in detail..." required></textarea>
+          <label for="designDescription">Deskripsi Detail</label>
+          <textarea id="designDescription" placeholder="Jelaskan kebutuhan desain Anda secara detail..." required></textarea>
         </div>
         
         <button type="submit" class="submit-btn">
-          <i class="fas fa-paper-plane"></i> Send Order
+          <i class="fas fa-paper-plane"></i> Kirim Pesanan
         </button>
       </form>
     </div>
@@ -1562,33 +1521,13 @@
       easing: 'ease-in-out-quad'
     });
 
-    // Language Switcher Function
-    function changeLanguage(lang) {
-      const buttons = document.querySelectorAll('.language-btn');
-      buttons.forEach(btn => {
-        if (btn.textContent === lang.toUpperCase()) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-      
-      // Here you would typically load language-specific content
-      // For this example, we'll just show an alert
-      if (lang === 'id') {
-        alert('Mengubah bahasa ke Indonesia');
-      } else {
-        alert('Changing language to English');
-      }
-    }
-
     // =====================================
     // DESIGN SERVICES FUNCTIONS
     // =====================================
     // Open Order Modal
     function openOrderModal(packageName) {
       document.getElementById('selectedPackage').value = packageName;
-      document.getElementById('modalPackageTitle').textContent = `Order ${packageName}`;
+      document.getElementById('modalPackageTitle').textContent = `Pesan ${packageName}`;
       document.getElementById('orderModal').style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
@@ -1606,24 +1545,24 @@
       const packageName = document.getElementById('selectedPackage').value;
       const name = document.getElementById('customerName').value;
       const whatsapp = document.getElementById('whatsappNumber').value;
-      const email = document.getElementById('customerEmail').value || 'Not provided';
-      const reference = document.getElementById('designReference').value || 'No reference';
+      const email = document.getElementById('customerEmail').value || 'Tidak disediakan';
+      const reference = document.getElementById('designReference').value || 'Tidak ada referensi';
       const description = document.getElementById('designDescription').value;
       
-      const whatsappMessage = `📋 *NEW DESIGN ORDER* 📋
+      const whatsappMessage = `📋 *PESANAN DESAIN BARU* 📋
 
-🎨 *Package*: ${packageName}
-👤 *Name*: ${name}
+🎨 *Paket*: ${packageName}
+👤 *Nama*: ${name}
 📞 *WhatsApp*: ${whatsapp}
 📧 *Email*: ${email}
 
-🖼 *Design Reference*:
+🖼 *Referensi Desain*:
 ${reference}
 
-📝 *Project Details*:
+📝 *Detail Proyek*:
 ${description}
 
-💬 *Please confirm receipt of this order*`;
+💬 *Mohon konfirmasi penerimaan pesanan ini*`;
 
       const encodedMessage = encodeURIComponent(whatsappMessage);
       window.open(`https://wa.me/6285928811220?text=${encodedMessage}`, '_blank');
@@ -1633,7 +1572,7 @@ ${description}
       closeModal();
       
       // Show confirmation
-      alert('Order sent successfully! We will contact you shortly via WhatsApp.');
+      alert('Pesanan berhasil dikirim! Kami akan segera menghubungi Anda via WhatsApp.');
     });
 
     // =====================================
