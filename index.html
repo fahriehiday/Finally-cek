@@ -6,6 +6,7 @@
   <title>Dashboard Produk Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * {
@@ -15,73 +16,144 @@
       font-family: 'Montserrat', sans-serif;
     }
 
+    :root {
+      --primary: #6a1b9a;
+      --primary-light: #9c27b0;
+      --primary-dark: #4a148c;
+      --secondary: #ff4081;
+      --accent: #00bcd4;
+    }
+
     body {
-      background: linear-gradient(to right, #f3e5f5, #e1bee7);
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
       color: #212121;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     .sidebar {
-      width: 250px;
-      background-color: #6a1b9a;
+      width: 280px;
+      background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
       height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
       padding: 1.5rem;
       color: white;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transform: translateX(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.hidden {
+      transform: translateX(-100%);
     }
 
     .sidebar h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       font-weight: 700;
+      background: linear-gradient(to right, #fff, #e1bee7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .sidebar a {
-      display: block;
+      display: flex;
+      align-items: center;
       color: white;
-      padding: 0.75rem;
+      padding: 0.75rem 1rem;
       text-decoration: none;
       border-radius: 8px;
       margin-bottom: 0.5rem;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
       font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar a::before {
+      content: '';
+      position: absolute;
+      left: -100%;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
     }
 
     .sidebar a:hover {
-      background-color: #8e24aa;
+      background-color: var(--primary-light);
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .sidebar a:hover::before {
+      left: 100%;
+    }
+
+    .sidebar a i {
+      margin-right: 10px;
+      font-size: 1.2rem;
     }
 
     .main-content {
-      margin-left: 250px;
+      margin-left: 280px;
       padding: 2rem;
+      transition: margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .main-content.full-width {
+      margin-left: 0;
     }
 
     header {
       text-align: center;
       padding: 2rem 0;
+      position: relative;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 2px;
     }
 
     header h1 {
       font-size: 2.8rem;
       font-weight: 700;
-      color: #6a1b9a;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
 
     .button-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
-      padding: 1rem;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      max-width: 600px;
     }
 
     .button {
-      background: #ab47bc;
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 1rem 2rem;
       border: none;
       border-radius: 12px;
       font-size: 1.1rem;
@@ -89,226 +161,573 @@
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
-      width: 80%;
+      width: 100%;
       text-align: center;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
     }
 
     .button:hover {
-      background-color: #9c27b0;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .button:hover::after {
+      transform: translateX(100%);
     }
 
     #form-lanjutan {
       display: none;
-      background-color: rgba(255, 255, 255, 0.9);
-      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.95);
+      max-width: 700px;
       margin: 3rem auto;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     #form-lanjutan h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #6a1b9a;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      text-align: center;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    #form-lanjutan h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 3px;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     label {
       text-align: left;
       font-weight: 600;
+      color: var(--primary-dark);
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
     }
 
     input,
     select,
-    button {
-      padding: 0.75rem;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
+    button[type="submit"] {
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
       font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(154, 68, 181, 0.2);
     }
 
     button[type="submit"] {
-      background-color: #ab47bc;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
       color: white;
       font-weight: 600;
       border: none;
       cursor: pointer;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(154, 68, 181, 0.4);
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(154, 68, 181, 0.5);
     }
 
     .hidden { display: none; }
     .product-selection {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      padding: 1rem;
-      background: #f5f3ff;
-      border-radius: 0.5rem;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: rgba(245, 243, 255, 0.7);
+      border-radius: 12px;
+      border: 1px solid rgba(167, 139, 250, 0.3);
     }
 
     .product-selection div {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .copy-btn {
-      margin-top: 5px;
-      background-color: #a78bfa;
-      color: #1f2937;
+      margin-top: 10px;
+      background: linear-gradient(to right, #a78bfa, #8b5cf6);
+      color: white;
       border: none;
-      padding: 0.4rem 0.7rem;
-      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .total-payment {
       font-weight: bold;
-      color: #6a1b9a;
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 1px solid #6a1b9a;
-      border-radius: 8px;
-      background-color: rgba(106, 27, 154, 0.1);
+      color: white;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
       text-align: center;
+      font-size: 1.2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
 
     .notification {
       margin-top: 1rem;
-      padding: 1rem;
-      background-color: #e8f5e9;
-      border: 1px solid #c8e6c9;
-      border-radius: 8px;
-      color: #388e3c;
+      padding: 1.2rem;
+      background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+      border: 1px solid #a5d6a7;
+      border-radius: 10px;
+      color: #2e7d32;
       font-weight: bold;
+      font-size: 0.95rem;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .floating-notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 1000;
+      animation: slideInUp 0.5s ease, bounce 2s infinite;
+      display: none;
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10, 10);
+      opacity: 0;
+      transition: transform .5s, opacity 1s;
+    }
+
+    .ripple:active:after {
+      transform: scale(0, 0);
+      opacity: 0.3;
+      transition: 0s;
+    }
+
+    .slide-in {
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.visible {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+      }
     }
 
     @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: 1rem;
-      }
-
       header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
-
+      
+      #form-lanjutan {
+        padding: 1.5rem;
+        margin: 2rem auto;
+      }
+      
+      .product-selection div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      
       .button {
-        width: 100%;
+        padding: 0.8rem 1.5rem;
       }
     }
+
+    /* Loading animation */
+    .loader {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <button class="menu-toggle ripple" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
+
   <div class="sidebar">
-    <h2>Dashboard</h2>
-    <a href="#" onclick="showForm()">Pendaftaran</a>
-    <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">Contoh Desain Template</a>
-    <a href="https://drive.google.com/drive/folders/1r9ga93TSo4Hr2XdRtYckltxMulFNclAM?usp=sharing" target="_blank">Testimoni</a>
-    <a href="https://wa.me/6285928811220" target="_blank">Chat Admin via WhatsApp</a>
+    <h2>Digital Pro</h2>
+    <a href="#" onclick="showForm()">
+      <i class="fas fa-user-plus"></i> Pendaftaran
+    </a>
+    <a href="https://drive.google.com/drive/folders/1ZyYWrvTqVmB7TSFVmCwM2J9u6vMMwvyp?usp=drive_link" target="_blank">
+      <i class="fas fa-images"></i> Contoh Desain
+    </a>
+    <a href="https://drive.google.com/drive/folders/1r9ga93TSo4Hr2XdRtYckltxMulFNclAM?usp=sharing" target="_blank">
+      <i class="fas fa-comment-alt"></i> Testimoni
+    </a>
+    <a href="https://wa.me/6285928811220" target="_blank">
+      <i class="fab fa-whatsapp"></i> Chat Admin
+    </a>
   </div>
 
   <div class="main-content">
-    <header>
-      <h1>🎨 Template Produk Digital Premium</h1>
+    <header data-aos="fade-down">
+      <h1 class="animate__animated animate__fadeIn">🎨 Template Produk Digital Premium</h1>
+      <p class="animate__animated animate__fadeIn animate__delay-1s" style="color: #666; margin-top: 1rem;">Platform profesional untuk kebutuhan template digital Anda</p>
     </header>
 
-    <div class="button-group">
-      <a class="button" href="#" onclick="showForm()">Pendaftaran</a>
-      <button class="button" onclick="refreshPage()">Refresh Halaman</button>
+    <div class="button-group" data-aos="fade-up" data-aos-delay="300">
+      <a class="button ripple" href="#" onclick="showForm()">
+        <i class="fas fa-rocket"></i> Pendaftaran
+      </a>
+      <button class="button ripple" onclick="refreshPage()">
+        <i class="fas fa-sync-alt"></i> Refresh Halaman
+      </button>
     </div>
 
-    <section id="form-lanjutan" data-aos="fade-up">
+    <section id="form-lanjutan" data-aos="zoom-in" data-aos-delay="500">
       <h2>Formulir Pendaftaran</h2>
       <form onsubmit="kirimWhatsApp(event)">
-        <label for="nama">Nama Lengkap:</label>
-        <input type="text" id="nama" required>
+        <div class="form-group" data-aos="fade-right" data-aos-delay="100">
+          <label for="nama">Nama Lengkap:</label>
+          <input type="text" id="nama" required>
+        </div>
 
-        <label for="wa">Nomor WhatsApp:</label>
-        <input type="text" id="wa" required>
+        <div class="form-group" data-aos="fade-left" data-aos-delay="150">
+          <label for="wa">Nomor WhatsApp:</label>
+          <input type="text" id="wa" required>
+        </div>
 
-        <label for="paket">Pilih Paket:</label>
-        <select id="paket" required onchange="updateTotalPayment()">
-          <option value="">-- Pilih Paket --</option>
-          <option value="30000" data-max="3">Harga Semula  ̶3̶4̶.̶9̶9̶9̶  Menjadi Rp30.000 / 1 Bulan</option>
-          <option value="50000" data-max="6">Harga Semula  ̶5̶4̶.̶9̶9̶9̶  Menjadi Rp50.000 / 2 Bulan</option>
-          <option value="80000" data-max="9">Harga Semula  ̶1̶0̶0̶.̶0̶0̶0̶  Menjadi Rp80.000 / 3 Bulan</option>
-        </select>
+        <div class="form-group" data-aos="fade-right" data-aos-delay="200">
+          <label for="paket">Pilih Paket:</label>
+          <select id="paket" required onchange="updateTotalPayment()" class="ripple">
+            <option value="">-- Pilih Paket --</option>
+            <option value="30000" data-max="3">Harga Semula ̶3̶4̶.̶9̶9̶9̶ Menjadi Rp30.000 / 1 Bulan</option>
+            <option value="50000" data-max="6">Harga Semula ̶5̶4̶.̶9̶9̶9̶ Menjadi Rp50.000 / 2 Bulan</option>
+            <option value="80000" data-max="9">Harga Semula ̶1̶0̶0̶.̶0̶0̶0̶ Menjadi Rp80.000 / 3 Bulan</option>
+          </select>
+        </div>
 
-        <div id="notification" class="notification hidden"></div>
+        <div id="notification" class="notification hidden" data-aos="fade-up"></div>
 
-        <label>Pilih Produk Awal:</label>
-        <div class="product-selection">
-          <div>
-            <input type="number" id="cv-count" min="0" value="0" style="width:50px" onchange="updateTotalPayment()">
-            <label for="cv-count">CV</label>
-          </div>
-          <div>
-            <input type="number" id="presentation-count" min="0" value="0" style="width:50px" onchange="updateTotalPayment()">
-            <label for="presentation-count">Presentation</label>
-          </div>
-          <div>
-            <input type="number" id="portfolio-count" min="0" value="0" style="width:50px" onchange="updateTotalPayment()">
-            <label for="portfolio-count">Portfolio</label>
+        <div data-aos="fade-up" data-aos-delay="250">
+          <label>Pilih Produk Awal:</label>
+          <div class="product-selection">
+            <div data-aos="fade-right" data-aos-delay="300">
+              <input type="number" id="cv-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()" class="ripple">
+              <label for="cv-count">CV</label>
+            </div>
+            <div data-aos="fade-right" data-aos-delay="350">
+              <input type="number" id="presentation-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()" class="ripple">
+              <label for="presentation-count">Presentation</label>
+            </div>
+            <div data-aos="fade-right" data-aos-delay="400">
+              <input type="number" id="portfolio-count" min="0" value="0" style="width:70px" onchange="updateTotalPayment()" class="ripple">
+              <label for="portfolio-count">Portfolio</label>
+            </div>
           </div>
         </div>
 
-        <p style="color: red;">Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. Namun, jika total produk yang dipilih melebihi batas paket, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.</p>
+        <div class="tooltip" data-aos="fade-up" data-aos-delay="450">
+          <p style="color: var(--primary); font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Informasi Pengingat: Anda dapat memilih produk tanpa batasan maksimal. 
+            Namun, jika total produk yang dipilih melebihi batas paket, akan dikenakan biaya tambahan sebesar Rp10.000 untuk setiap produk tambahan.
+          </p>
+          <span class="tooltiptext">Biaya tambahan hanya berlaku untuk produk awal yang melebihi kuota paket</span>
+        </div>
 
-        <label for="metode">Metode Pembayaran:</label>
-        <select id="metode" required onchange="updateRekening(); updateTotalPayment()">
-          <option value="">-- Pilih Metode --</option>
-          <option value="DANA">DANA</option>
-          <option value="Bank Mandiri">Bank Mandiri</option>
-        </select>
+        <div class="form-group" data-aos="fade-left" data-aos-delay="500">
+          <label for="metode">Metode Pembayaran:</label>
+          <select id="metode" required onchange="updateRekening(); updateTotalPayment()" class="ripple">
+            <option value="">-- Pilih Metode --</option>
+            <option value="DANA">DANA</option>
+            <option value="Bank Mandiri">Bank Mandiri</option>
+          </select>
+        </div>
 
-        <div id="rekening" class="hidden">
+        <div id="rekening" class="hidden" data-aos="fade-up" data-aos-delay="550">
           <label>Nomor untuk Transfer:</label>
-          <div id="nomorRekening"></div>
-          <button type="button" class="copy-btn" onclick="copyRekening()">Salin Nomor</button>
+          <div id="nomorRekening" style="font-weight: bold; font-size: 1.1rem; margin: 0.5rem 0;"></div>
+          <button type="button" class="copy-btn ripple" onclick="copyRekening()">
+            <i class="fas fa-copy"></i> Salin Nomor
+          </button>
         </div>
 
-        <label for="bukti">Upload Bukti Pembayaran (foto):</label>
-        <input type="file" id="bukti" required>
+        <div class="form-group" data-aos="fade-right" data-aos-delay="600">
+          <label for="bukti">Upload Bukti Pembayaran (foto):</label>
+          <input type="file" id="bukti" required class="ripple">
+        </div>
 
-        <label for="kode">Buat Kode Referral Anda</label>
-        <input type="text" id="kode" placeholder="Contoh: NAMAKAMU25" required>
+        <div class="form-group" data-aos="fade-left" data-aos-delay="650">
+          <label for="kode">Buat Kode Referral Anda</label>
+          <input type="text" id="kode" placeholder="Contoh: NAMAKAMU25" required>
+        </div>
 
-        <label for="referral">Kode Referral Orang Lain (opsional)</label>
-        <input type="text" id="referral">
+        <div class="form-group" data-aos="fade-right" data-aos-delay="700">
+          <label for="referral">Kode Referral Orang Lain (opsional)</label>
+          <input type="text" id="referral">
+        </div>
 
-        <div class="total-payment" id="total-payment"></div>
+        <div class="total-payment" id="total-payment" data-aos="fade-up" data-aos-delay="750"></div>
 
-        <button type="submit">🚀 Daftar Sekarang</button>
+        <button type="submit" class="ripple" data-aos="zoom-in" data-aos-delay="800">
+          <i class="fas fa-paper-plane"></i> 🚀 Daftar Sekarang
+        </button>
       </form>
     </section>
   </div>
 
+  <div class="floating-notification" id="floating-notification">
+    <i class="fas fa-bell"></i> Dapatkan diskon 10% untuk pendaftaran hari ini!
+  </div>
+
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <p>Memproses data Anda...</p>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // Initialize animations
     AOS.init({
-      duration: 1000,
-      once: true
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out-quad'
     });
 
+    // Show floating notification after delay
+    setTimeout(() => {
+      const notification = document.getElementById('floating-notification');
+      notification.style.display = 'block';
+      
+      // Close notification after 5 seconds
+      setTimeout(() => {
+        notification.style.animation = 'fadeOut 0.5s ease forwards';
+        setTimeout(() => notification.style.display = 'none', 500);
+      }, 5000);
+    }, 2000);
+
+    // Toggle sidebar on mobile
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('visible');
+    }
+
     function showForm() {
-      document.getElementById('form-lanjutan').style.display = 'block';
+      const form = document.getElementById('form-lanjutan');
+      form.style.display = 'block';
+      
+      // Close sidebar if on mobile
+      if (window.innerWidth < 992) {
+        document.querySelector('.sidebar').classList.remove('visible');
+      }
+      
+      // Scroll to form
+      form.scrollIntoView({ behavior: 'smooth' });
     }
 
     function refreshPage() {
-      location.reload(); // Refresh the page
+      // Show loading animation
+      document.getElementById('loader').style.display = 'flex';
+      
+      // Refresh after animation completes
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
     }
 
     function updateRekening() {
@@ -327,15 +746,23 @@
 
     function copyRekening() {
       const text = document.getElementById("nomorRekening").textContent;
-      navigator.clipboard.writeText(text).then(() => alert("Nomor berhasil disalin"));
+      navigator.clipboard.writeText(text).then(() => {
+        // Show copied notification
+        const originalText = document.querySelector('.copy-btn').innerHTML;
+        document.querySelector('.copy-btn').innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+        
+        setTimeout(() => {
+          document.querySelector('.copy-btn').innerHTML = originalText;
+        }, 2000);
+      });
     }
 
     function updateTotalPayment() {
       const paket = document.getElementById("paket");
       const maxProducts = parseInt(paket.options[paket.selectedIndex].getAttribute('data-max'));
-      const cvCount = parseInt(document.getElementById("cv-count").value);
-      const presentationCount = parseInt(document.getElementById("presentation-count").value);
-      const portfolioCount = parseInt(document.getElementById("portfolio-count").value);
+      const cvCount = parseInt(document.getElementById("cv-count").value) || 0;
+      const presentationCount = parseInt(document.getElementById("presentation-count").value) || 0;
+      const portfolioCount = parseInt(document.getElementById("portfolio-count").value) || 0;
       const totalSelected = cvCount + presentationCount + portfolioCount;
       let additionalCost = 0;
 
@@ -347,7 +774,13 @@
       const totalPaymentElement = document.getElementById("total-payment");
 
       if (paket.value) {
-        totalPaymentElement.textContent = `Total yang harus dibayar: Rp${totalPayment}`;
+        totalPaymentElement.textContent = `Total yang harus dibayar: Rp${totalPayment.toLocaleString('id-ID')}`;
+        
+        // Add animation to highlight change
+        totalPaymentElement.style.animation = 'none';
+        setTimeout(() => {
+          totalPaymentElement.style.animation = 'pulse 1s ease';
+        }, 10);
       } else {
         totalPaymentElement.textContent = '';
       }
@@ -370,11 +803,16 @@
 
     function kirimWhatsApp(e) {
       e.preventDefault();
+      
+      // Show loading animation
+      document.getElementById('loader').style.display = 'flex';
+      
+      // Get form values
       const nama = document.getElementById("nama").value;
       const wa = document.getElementById("wa").value;
       const paket = document.getElementById("paket");
       const paketText = paket.options[paket.selectedIndex].text;
-      const total = document.getElementById("total-payment").textContent.replace(/[^0-9]/g, ''); // Get total payment value
+      const total = document.getElementById("total-payment").textContent.replace(/[^0-9]/g, '');
       const metode = document.getElementById("metode").value;
       const kode = document.getElementById("kode").value;
       const referral = document.getElementById("referral").value || "-";
@@ -390,11 +828,55 @@
       
       const produkAwalText = produkAwal.join(", ") || "Tidak memilih produk";
 
-      const pesan = `📋 Form Pendaftaran Produk Digital Premium\n\n🧑 Nama: ${nama}\n📱 WhatsApp: ${wa}\n📦 Paket Dipilih: ${paketText}\n🎁 Produk Awal: ${produkAwalText}\n💸 Total Transfer: Rp${total}\n🏦 Metode Pembayaran: ${metode}\n🏷️ Kode Referral Baru: ${kode}\n👥 Kode Referral Teman: ${referral}\n📎 Bukti pembayaran sudah diupload melalui form.`;
+      // Format WhatsApp message
+      const pesan = `📋 *Form Pendaftaran Produk Digital Premium*\n\n` +
+                    `🧑 *Nama*: ${nama}\n` +
+                    `📱 *WhatsApp*: ${wa}\n` +
+                    `📦 *Paket Dipilih*: ${paketText}\n` +
+                    `🎁 *Produk Awal*: ${produkAwalText}\n` +
+                    `💸 *Total Transfer*: Rp${total}\n` +
+                    `🏦 *Metode Pembayaran*: ${metode}\n` +
+                    `🏷️ *Kode Referral Baru*: ${kode}\n` +
+                    `👥 *Kode Referral Teman*: ${referral}\n\n` +
+                    `📎 *Bukti pembayaran sudah diupload melalui form.*`;
 
-      const url = `https://wa.me/6285928811220?text=${encodeURIComponent(pesan)}`;
-      window.open(url, "_blank");
+      // Open WhatsApp after a short delay to allow animation to show
+      setTimeout(() => {
+        const url = `https://wa.me/6285928811220?text=${encodeURIComponent(pesan)}`;
+        window.open(url, "_blank");
+        
+        // Hide loader after WhatsApp opens
+        document.getElementById('loader').style.display = 'none';
+      }, 1500);
     }
+
+    // Add ripple effect to all buttons
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('.ripple');
+      buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple-effect';
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 1000);
+        });
+      });
+      
+      // Show form if there's a hash in URL
+      if (window.location.hash === '#daftar') {
+        showForm();
+      }
+    });
   </script>
 </body>
 </html>
