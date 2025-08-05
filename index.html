@@ -22,6 +22,7 @@
       --primary-dark: #4a148c;
       --secondary: #ff4081;
       --accent: #00bcd4;
+      --gold: #FFD700;
     }
 
     body {
@@ -463,6 +464,143 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
+    /* Keunggulan Section */
+    .keunggulan-section {
+      max-width: 800px;
+      margin: 4rem auto;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245, 243, 255, 0.95) 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .keunggulan-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" opacity="0.05"><path d="M50 0L100 50L50 100L0 50L50 0Z" fill="%236a1b9a"/></svg>');
+      background-size: 60px 60px;
+      z-index: -1;
+    }
+
+    .keunggulan-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      text-align: center;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .keunggulan-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    .keunggulan-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .keunggulan-item {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .keunggulan-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 50%;
+    }
+
+    .keunggulan-item:hover {
+      transform: translateX(10px);
+    }
+
+    .keunggulan-highlight {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .keunggulan-divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--primary), transparent);
+      margin: 2rem 0;
+      border: none;
+    }
+
+    .keunggulan-price {
+      background: rgba(106, 27, 154, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .keunggulan-price:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .keunggulan-price-title {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .keunggulan-price-title i {
+      margin-right: 10px;
+      color: var(--gold);
+    }
+
+    .keunggulan-price-desc {
+      padding-left: 1.5rem;
+    }
+
+    .keunggulan-cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .keunggulan-badge {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: linear-gradient(to right, var(--secondary), #ff6b6b);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: 700;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: pulse 1.5s infinite;
+    }
+
     @media (max-width: 992px) {
       .sidebar {
         transform: translateX(-100%);
@@ -482,6 +620,11 @@
       
       header h1 {
         font-size: 2.2rem;
+      }
+
+      .keunggulan-section {
+        padding: 1.5rem;
+        margin: 3rem auto;
       }
     }
 
@@ -503,6 +646,14 @@
       
       .button {
         padding: 0.8rem 1.5rem;
+      }
+
+      .keunggulan-section h2 {
+        font-size: 1.6rem;
+      }
+
+      .keunggulan-content {
+        font-size: 1rem;
       }
     }
 
@@ -666,6 +817,88 @@
           <i class="fas fa-paper-plane"></i> 🚀 Daftar Sekarang
         </button>
       </form>
+    </section>
+
+    <!-- Keunggulan Section -->
+    <section class="keunggulan-section" data-aos="fade-up" data-aos-delay="300">
+      <span class="keunggulan-badge">LIMITED OFFER!</span>
+      <h2>KEUNGGULAN PRODUK KAMI</h2>
+      
+      <div class="keunggulan-content">
+        <div class="keunggulan-item" data-aos="fade-right">
+          <span class="keunggulan-highlight">📍 KOMUNITAS TEMPLATE DAN PRODUK DIGITAL</span><br>
+          <span class="keunggulan-highlight">💡 Template Presentasi, CV, Portofolio Berkualitas PREMIUM !!💎💎</span>
+        </div>
+
+        <div class="keunggulan-item" data-aos="fade-left" data-aos-delay="100">
+          <span class="keunggulan-highlight">📢 MAU DAPET TEMPLATE KEREN TIAP MINGGU?</span>
+        </div>
+
+        <div class="keunggulan-item" data-aos="fade-right" data-aos-delay="200">
+          <span class="keunggulan-highlight">📌 Cocok buat:</span><br>
+          📝 Pelajar / Mahasiswa<br>
+          💻 Kreator Pemula<br>
+          🧠 Pekerja Kreatif<br>
+          📈 Yang Mau Bangun Personal Brand
+        </div>
+
+        <div class="keunggulan-item" data-aos="fade-left" data-aos-delay="300">
+          Bayangin kalau kamu bisa:<br><br>
+          ✅ <strong>Pilih Template Presentasi, CV Kerja, Portofolio Premium</strong><br>
+          ✅ <strong>Bikin presentasi tugas sekolah/kampus lebih kece</strong><br>
+          ✅ <strong>Punya CV kerja yang dilirik HRD</strong><br>
+          ✅ <strong>Dapat desain digital siap pakai tanpa repot</strong><br>
+          ✅ <strong>Bisa kalian Jual Ulang Loh</strong><br>
+          ✅ <strong>Template Yang Dapat Di Akses Full</strong><br>
+          ✅ <strong>Voting: Tentukan Konten Minggu Depan</strong><br>
+          ✅ <strong>Semua itu kamu dapat… cuma dari 1 grup!</strong>
+        </div>
+
+        <hr class="keunggulan-divider">
+
+        <div class="keunggulan-price" data-aos="zoom-in">
+          <div class="keunggulan-price-title">
+            <i class="fas fa-gem"></i> 💰 Hanya Rp30.000 / 1 bulan, Harga Semula <del>34.999</del>
+          </div>
+          <div class="keunggulan-price-desc">
+            🎁 3 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
+            🎁 Total 7 Produk / Template Digital Baru Dalam 1 Bulan
+          </div>
+        </div>
+
+        <div class="keunggulan-price" data-aos="zoom-in" data-aos-delay="100">
+          <div class="keunggulan-price-title">
+            <i class="fas fa-gem"></i> 💰 Hanya Rp50.000 / 2 bulan, Harga Semula <del>69.999</del>
+          </div>
+          <div class="keunggulan-price-desc">
+            🎁 6 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
+            🎁 Total 14 Produk / Template Digital Baru Dalam 2 Bulan
+          </div>
+        </div>
+
+        <div class="keunggulan-price" data-aos="zoom-in" data-aos-delay="200">
+          <div class="keunggulan-price-title">
+            <i class="fas fa-gem"></i> 💰 Hanya Rp80.000 / 3 bulan, Harga Semula <del>105.999</del>
+          </div>
+          <div class="keunggulan-price-desc">
+            🎁 9 Produk Awal / Template Digital Baru, Serta Tambahan 1 Template / Minggu<br>
+            🎁 Total 21 Produk / Template Digital Baru Dalam 3 Bulan
+          </div>
+        </div>
+
+        <hr class="keunggulan-divider">
+
+        <div class="keunggulan-item" data-aos="fade-up">
+          ⚠ <span class="keunggulan-highlight">Terbatas!</span><br>
+          🪩 Hanya untuk yang serius ingin berkembang
+        </div>
+
+        <div class="keunggulan-cta" data-aos="zoom-in">
+          <a href="#" onclick="showForm()" class="button ripple" style="max-width: 300px; margin: 0 auto;">
+            <i class="fas fa-crown"></i> DAFTAR SEKARANG
+          </a>
+        </div>
+      </div>
     </section>
   </div>
 
